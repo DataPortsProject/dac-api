@@ -1,0 +1,11 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["promise", "prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "no-use-before-define": 0
+  }
+}

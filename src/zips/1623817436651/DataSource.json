@@ -1,0 +1,38 @@
+{
+    "id": "urn:ngsi-ld:DataSource:PcsData",
+    "type": "DataSource",
+    "attributes": {},
+    "dataProvided": {
+        "type": "StructuredValue",
+        "value": {
+            "id": "string",
+            "arrival": "object",
+            "dataProvider": "object",
+            "departure": "object",
+            "locode": "object",
+            "scalePort": "object",
+            "source": "object",
+            "status": "object",
+            "terminal": "object",
+            "vessel": "object",
+            "vesselConsignee": "object",
+            "type": "PcsData"
+        },
+        "metadata": {}
+    },
+    "description": {
+        "type": "Text",
+        "value": "PcsData data source",
+        "metadata": {}
+    },
+    "onChain": {
+        "type": "Boolean",
+        "value": false,
+        "metadata": {}
+    },
+    "dataModels": {
+        "type": "Text",
+        "value": "PcsData/PcsData-schema.json",
+        "metadata": {}
+    }
+}

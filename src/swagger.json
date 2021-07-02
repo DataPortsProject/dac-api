@@ -1,0 +1,783 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "0.1.0",
+		"title": "DataPorts API with swagger",
+		"description": "This is a simple REST API made with Node.JS and documented with Swagger",
+		"license": {
+			"name": "MIT",
+			"url": "https://opensource.org/licenses/MIT"
+		},
+		"contact": {
+			"name": "José A. Clemente",
+			"email": "jclemente@prodevelop.es"
+		}
+	},
+	"host": "localhost:3000",
+	"basePath": "/",
+	"tags": [
+		{
+			"name": "default",
+			"description": "API for users in the system"
+		},
+		{
+			"name": "pubsub",
+			"description": "API for publish subscribe agents"
+		},
+		{
+			"name": "agents",
+			"description": "API for agents/containers services"
+		}
+	],
+	"schemes": [
+		"http"
+	],
+	"paths": {
+		"/onDemand": {
+			"post": {
+				"tags": [
+					"default"
+				],
+				"summary": "Create an on demand agent",
+				"description": "",
+				"operationId": "createOnDemand",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Create an on demand agent",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/OnDemand"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/OnDemand"
+						}
+					},
+					"400": {
+						"description": "Image not found"
+					},
+					"500": {
+						"description": "Internal error"
+					}
+				},
+				"security": [
+					{
+						"apikey": []
+					}
+				]
+			}
+		},
+		"/images": {
+			"get": {
+				"tags": [
+					"default"
+				],
+				"summary": "Returns the images availables on this host",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Image"
+						}
+					}
+				}
+			}
+		},
+		"/ngsiagent": {
+			"get": {
+				"tags": [
+					"default"
+				],
+				"summary": "Returns the list",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/NGSIAgent"
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"default"
+				],
+				"summary": "Create an NGSI Agent",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/NGSIAgent"
+						}
+					}
+				}
+			}
+		},
+		"/ngsiagent/{id}": {
+			"parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"required": true,
+					"description": "ID of the agent that we want to delete",
+					"type": "string"
+				}
+			],
+			"delete": {
+				"summary": "Delete an NGSI Agent",
+				"tags": [
+					"default"
+				],
+				"responses": {
+					"200": {
+						"description": "Agent is deleted"
+					}
+				}
+			},
+			"get": {
+				"summary": "Returns the detail of an NGSI Agent",
+				"tags": [
+					"default"
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "The id of the ngsiagent",
+						"schema": {
+							"$ref": ""
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User is updated",
+						"schema": {
+							"$ref": ""
+						}
+					}
+				}
+			}
+		},
+		"/pubsub/getTemplate": {
+			"get": {
+				"tags": [
+					"pubsub"
+				],
+				"operationId": "getTemplate",
+				"produces": [
+					"application/json"
+				],
+				"summary": "Returns a template for creating an agent",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/containerTemplate"
+						}
+					},
+					"400": {
+						"description": "Couldn't retrieve a template"
+					},
+					"500": {
+						"description": "Internal error"
+					}
+				}
+			}
+		},
+		"/pubsub/createContainer": {
+			"post": {
+				"tags": [
+					"pubsub"
+				],
+				"summary": "Creates and start an agent container",
+				"operationId": "createContainer",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Creates and start an agent container",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/containerTemplate"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/createContainer"
+						}
+					},
+					"400": {
+						"description": "Bad parameter"
+					},
+					"409": {
+						"description": "Conflict"
+					},
+					"500": {
+						"description": "Internal error"
+					}
+				}
+			}
+		},
+		"/pubsub/startContainer": {
+			"post": {
+				"tags": [
+					"pubsub"
+				],
+				"summary": "Starts an agent container given the id",
+				"operationId": "startContainer",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Start an agent container"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/startContainerResponse"
+						}
+					},
+					"304": {
+						"description": "Container already started"
+					},
+					"404": {
+						"description": "No such container"
+					},
+					"500": {
+						"description": "Internal error"
+					}
+				}
+			}
+		},
+		"/pubsub/stopContainer": {
+			"post": {
+				"tags": [
+					"pubsub"
+				],
+				"summary": "Stops an agent container given the id",
+				"operationId": "stopContainer",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Stops a container"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/stopContainerResponse"
+						}
+					},
+					"304": {
+						"description": "Container already stopped"
+					},
+					"404": {
+						"description": "No such container"
+					},
+					"500": {
+						"description": "Internal error"
+					}
+				}
+			}
+		},
+		"/agents/ngsiagent": {
+			"get": {
+				"tags": [
+					"agents"
+				],
+				"operationId": "ngsiagent",
+				"produces": [
+					"application/json"
+				],
+				"summary": "Returns all agents on the system",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ngsiagent"
+						}
+					},
+					"400": {
+						"description": "Bad parameter"
+					},
+					"500": {
+						"description": "Server error"
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"agents"
+				],
+				"summary": "Creates and starts an agent given a template",
+				"operationId": "ngsiagent_create",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/ngsiagentTemplate"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {}
+					},
+					"400": {
+						"description": "Bad parameter"
+					},
+					"404": {
+						"description": "No such container"
+					},
+					"409": {
+						"description": "Conflict"
+					},
+					"500": {
+						"description": "Server error"
+					}
+				}
+			}
+		},
+		"/agents/ngsiagent/{id}/start": {
+			"patch": {
+				"tags": [
+					"agents"
+				],
+				"operationId": "start",
+				"produces": [
+					"application/json"
+				],
+				"parameters": {
+					"in": "path",
+					"name": "id",
+					"required": true,
+					"schema": {
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"summary": "Starts the specified agent on the url",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"properties": {
+								"id": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"304": {
+						"description": "Container already started"
+					},
+					"404": {
+						"description": "No such container"
+					},
+					"500": {
+						"description": "Server error"
+					}
+				}
+			}
+		},
+		"/agents/ngsiagent/{id}/stop": {
+			"patch": {
+				"tags": [
+					"agents"
+				],
+				"operationId": "stop",
+				"produces": [
+					"application/json"
+				],
+				"parameters": {
+					"in": "path",
+					"name": "id",
+					"required": true,
+					"schema": {
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"summary": "Stops the specified agent on the url",
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"304": {
+						"description": "Container already stoped"
+					},
+					"404": {
+						"description": "No such container"
+					},
+					"500": {
+						"description": "Server error"
+					}
+				}
+			}
+		},
+		"/agents/ngsiagent/{id}": {
+			"delete": {
+				"tags": [
+					"agents"
+				],
+				"operationId": "delete",
+				"produces": [
+					"application/json"
+				],
+				"parameters": {
+					"in": "path",
+					"name": "id",
+					"required": true,
+					"schema": {
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"summary": "Delete the specified agent on the url",
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"400": {
+						"description": "Bad parameter"
+					},
+					"409": {
+						"description": "Conflict"
+					},
+					"500": {
+						"description": "Server error"
+					}
+				}
+			}
+		},
+		"/agents/ngsiagent/{id}/log": {
+			"get": {
+				"tags": [
+					"agents"
+				],
+				"operationId": "log",
+				"produces": [
+					"application/json"
+				],
+				"parameters": {
+					"in": "path",
+					"name": "id",
+					"required": true,
+					"schema": {
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"summary": "Return the logs of the specified agent on the url",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"properties": {
+								"message": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "No such container"
+					},
+					"500": {
+						"description": "Server error"
+					}
+				}
+			}
+		},
+		"/agents/ngsiagent/{id}/inspect": {
+			"get": {
+				"tags": [
+					"agents"
+				],
+				"operationId": "inspect",
+				"produces": [
+					"application/json"
+				],
+				"parameters": {
+					"in": "path",
+					"name": "id",
+					"required": true,
+					"schema": {
+						"properties": {
+							"id": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"summary": "Returns de most relevant information of an agent",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/inspect"
+						}
+					},
+					"404": {
+						"description": "No such container"
+					},
+					"500": {
+						"description": "Server error"
+					}
+				}
+			}
+		}
+	},
+	"securityDefinitions": {
+		"apikey": {
+			"type": "apiKey",
+			"name": "Authorization",
+			"in": "header"
+		}
+	},
+	"definitions": {
+		"OnDemand": {
+			"type": "object",
+			"properties": {
+				"source": {
+					"type": "string"
+				},
+				"agent": {
+					"type": "string"
+				},
+				"data_model": {
+					"type": "string"
+				},
+				"callBack_url": {
+					"type": "string"
+				}
+			}
+		},
+		"Image": {
+			"required": [
+				"tag",
+				"id"
+			],
+			"properties": {
+				"tag": {
+					"type": "string"
+				},
+				"id": {
+					"type": "string"
+				}
+			}
+		},
+		"NGSIAgent": {
+			"required": [
+				"name",
+				"type",
+				"image"
+			],
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"id": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"image": {
+					"type": "string"
+				}
+			}
+		},
+		"containerTemplate": {
+			"required": [
+				"env",
+				"tag",
+				"image",
+				"containerName"
+			],
+			"properties": {
+				"env": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"image": {
+					"type": "string"
+				},
+				"tag": {
+					"type": "string"
+				},
+				"containername": {
+					"type": "string"
+				}
+			}
+		},
+		"createContainer": {
+			"properties": {
+				"Id": {
+					"type": "string"
+				},
+				"Warnings": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"containerName": {
+					"type": "string"
+				}
+			}
+		},
+		"startContainerResponse": {
+			"properties": {
+				"ID_Container": {
+					"type": "string"
+				},
+				"message": {
+					"type": "string"
+				},
+				"Warnings": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"stopContainerResponse": {
+			"properties": {
+				"message": {
+					"type": "string"
+				}
+			}
+		},
+		"ngsiagent": {
+			"properties": {
+				"Id": {
+					"type": "string"
+				},
+				"Names": {
+					"type": "string"
+				},
+				"Status": {
+					"type": "string"
+				},
+				"Image": {
+					"type": "string"
+				}
+			}
+		},
+		"ngsiagentTemplate": {
+			"properties": {
+				"ContainerName": {
+					"type": "string"
+				},
+				"Hostname": {
+					"type": "string"
+				},
+				"Domainname": {
+					"type": "string"
+				},
+				"User": {
+					"type": "string"
+				},
+				"Image": {
+					"type": "string"
+				},
+				"Env": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"inspect": {
+			"properties": {
+				"Id": {
+					"type": "string"
+				},
+				"Image": {
+					"type": "string"
+				},
+				"Status": {
+					"type": "string"
+				},
+				"Environment": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"key": {
+								"type": "string"
+							},
+							"value": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
