@@ -10,6 +10,7 @@ export default {
 	baseURL_ORION_LOCAL: 'http://localhost:1026',
 	// image pattern name
 	IMAGE_PATTERN_NAME: 'dataportsh2020/',
+	GITLAB_IMAGE_PATTERN_NAME: 'egitlab.iti.es:5050/ivela/images',
 	// methods petition API
 	METHOD_GET: 'GET',
 	METHOD_POST: 'POST',
@@ -33,5 +34,7 @@ export default {
 		'PYTHON_GET_PIP_SHA256'
 	],
 	gitlab_url: 'http://egitlab.iti.upv.es',
-	gitlab_token: 'D3-5YV3H1Zk7heVsnzX7'
+	gitlab_token: 'D3-5YV3H1Zk7heVsnzX7',
+	gitlab_images_token: 'RWyBsqSXzxBVZZdhFenm',
+	gitlab_login_string: 'docker login -u ivela -p RWyBsqSXzxBVZZdhFenm egitlab.iti.es:5050'
 };

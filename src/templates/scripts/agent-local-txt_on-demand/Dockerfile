@@ -21,5 +21,6 @@ run pip install python-dateutil>=2.8.0
 #environmental variables.
 
 ENV CALLBACK_URL=parameter_CallbackURL
+ENV RANDOM_ID=parameter_random
 
 CMD ["python", "-u", "/agent/script.py"]

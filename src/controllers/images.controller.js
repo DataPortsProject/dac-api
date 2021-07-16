@@ -18,7 +18,6 @@ export default router;
 
 // Implementation
 async function getAll(req, res) {
-	const { query } = req;
 	try {
 		const data = await imagesService.getAll();
 		res.status(200).json({
@@ -26,7 +25,6 @@ async function getAll(req, res) {
 			message: data
 		});
 	} catch (error) {
-		console.log('Controller error: ' + error);
 		logger.error(error);
 		if (error instanceof CustomError) {
 			const { message, name, stack, type } = error;
@@ -34,34 +32,32 @@ async function getAll(req, res) {
 				status: name,
 				message: message.message
 			});
-		} else {
-			return res.status(404).json({
-				status: 'Error',
-				message: 'An error occurred'
-			});
 		}
+		return res.status(404).json({
+			status: 'Error',
+			message: 'An error occurred'
+		});
 	}
 	return null;
 }
 
-//Id weather_env: sha256:e4fda8d01a0ccb4db9c785b4cbd3b0219ab2f9a5efc23592e6a5be6275030d5f
+// Id weather_env: sha256:e4fda8d01a0ccb4db9c785b4cbd3b0219ab2f9a5efc23592e6a5be6275030d5f
 
 async function getDataSource(req, res) {
 	const { params: { id } = { id: null } } = req;
 
 	try {
-		if (id.length != 71) {
+		if (id.length !== 71) {
 			return res.status(500).json({
 				status: 'Validation',
 				message: 'Image ID is not valid'
 			});
-		} else {
-			const data = await imagesService.getDataSource(id);
-			res.status(200).json({
-				status: 'OK',
-				message: data
-			});
 		}
+		const data = await imagesService.getDataSource(id);
+		res.status(200).json({
+			status: 'OK',
+			message: data
+		});
 	} catch (error) {
 		logger.error(error);
 		if (error instanceof CustomError) {
@@ -74,12 +70,11 @@ async function getDataSource(req, res) {
 				status: name,
 				message: message.message
 			});
-		} else {
-			return res.status(404).json({
-				status: 'Error',
-				message: 'An error occurred'
-			});
 		}
+		return res.status(404).json({
+			status: 'Error',
+			message: 'An error occurred'
+		});
 	}
 	return null;
 }
@@ -88,18 +83,17 @@ async function getTemplate(req, res) {
 	const { params: { id } = { id: null } } = req;
 
 	try {
-		if (id.length != 71) {
+		if (id.length !== 71) {
 			return res.status(500).json({
 				status: 'Validation',
 				message: 'Image ID is not valid'
 			});
-		} else {
-			const data = await imagesService.getTemplate(id);
-			res.status(200).json({
-				status: 'OK',
-				message: data
-			});
 		}
+		const data = await imagesService.getTemplate(id);
+		res.status(200).json({
+			status: 'OK',
+			message: data
+		});
 	} catch (error) {
 		logger.error(error);
 		if (error instanceof CustomError) {
@@ -112,12 +106,11 @@ async function getTemplate(req, res) {
 				status: name,
 				message: message.message
 			});
-		} else {
-			return res.status(404).json({
-				status: 'Error',
-				message: 'An error occurred'
-			});
 		}
+		return res.status(404).json({
+			status: 'Error',
+			message: 'An error occurred'
+		});
 	}
 	return null;
 }
@@ -139,12 +132,11 @@ async function deleteImage(req, res) {
 				status: name,
 				message: message.message
 			});
-		} else {
-			return res.status(404).json({
-				status: 'Error',
-				message: 'An error occurred'
-			});
 		}
+		return res.status(404).json({
+			status: 'Error',
+			message: 'An error occurred'
+		});
 	}
 	return null;
 }
@@ -179,10 +171,9 @@ async function getImagesFromExternalRepository(req, res) {
 
 async function downloadImageFromGitlab(req, res) {
 	const { path } = req.body;
-	const encodedUri = path.replace('/', '%2F');
 
 	try {
-		const data = await imagesService.downloadImageFromGitlab(encodedUri);
+		const data = await imagesService.downloadImageFromGitlab(path);
 		res.status(200).json({
 			status: 'OK',
 			message: data

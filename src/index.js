@@ -14,8 +14,11 @@ import agents from './controllers/agents.controller';
 import orion from './controllers/orion.controller';
 import template from './controllers/pythonTemplate.controller';
 import dataModel from './controllers/dataModel.controller';
+import notification from './controllers/notification.controller';
+import info from './controllers/info.controller';
 
 import connectToDb from './config/mongodb';
+// import websockets from './config/wsServer';
 
 connectToDb();
 
@@ -38,9 +41,15 @@ app.use('/agents', auth.authUser, auth.isAuthorized, agents);
 app.use('/orion', auth.authUser, auth.isAuthorized, orion);
 app.use('/pythonTemplate', auth.authUser, auth.isAuthorized, template);
 app.use('/dataModel', auth.authUser, auth.isAuthorized, dataModel);
+app.use('/notification', auth.authUser, auth.isAuthorized, notification);
+app.use('/info', auth.authUser, auth.isAuthorized, info);
+
+// Swagger description
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
 
 // Proceso en background para el borrado de contenedores on_demand. Se ejecuta cada 10 minutos
 setInterval(checkContainers, 600 * 1000);
 
-app.listen(config.PORT, () => logger.info(`Listen on ${config.PORT} port`));
+const server = app.listen(config.PORT, () => logger.info(`Listen on ${config.PORT} port`));
+
+// websockets(server);

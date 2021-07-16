@@ -1,5 +1,6 @@
 ﻿import { getImages, inspectImageByID, deleteImageByID } from '../api/docker_API';
-import { getRepositoryImages, downloadImage } from '../api/gitlab_API';
+import { getRepositoryImages } from '../api/gitlab_API';
+import { doLogin, downloadImage } from '../api/cmd';
 import CustomError from '../utils/CustomError';
 import { createImagesObj, createTemplateObj, createDataSourceObject } from '../utils/Mapping';
 
@@ -76,9 +77,12 @@ async function getImagesFromExternalRepository() {
 async function downloadImageFromGitlab(path) {
 	let data = [];
 	try {
-		await downloadImage(path).then(response => {
-			data = response;
-		});
+		await doLogin();
+		await downloadImage(path);
+		data = {
+			msg: 'image pulled successfully!',
+			image: path
+		};
 	} catch (error) {
 		throw new CustomError(error.response.data, error.response.status);
 	}

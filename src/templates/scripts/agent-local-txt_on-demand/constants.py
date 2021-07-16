@@ -3,6 +3,7 @@
 
 #-- Environmental variables
 CALLBACK_URL = parameter_CallbackURL
+RANDOM_ID = parameter_random
 
 class switch:
 

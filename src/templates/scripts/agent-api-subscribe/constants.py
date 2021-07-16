@@ -4,6 +4,7 @@
 #-- Environmental variables
 TIME_INTERVAL = parameter_timeInterval
 TIME_UNIT = parameter_timeUnit
+RANDOM_ID = parameter_random
 
 class switch:
 

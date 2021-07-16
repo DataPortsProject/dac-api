@@ -16,6 +16,8 @@ Before to execute the python script the following points:
 	- Go to page (for all the agents): https://tools.knowledgewalls.com/jsontostring. Select the content of file DataSource.json and paste the JSON in the page. Convert the JSON to String. Copy the output and paste the content on the label datasource_configuration in Dockerfile. 
 	Changing the string parameter_dataModelSerialized for the content of the JSON serialized to String.
 
+	- For the script.py file, check the sendNotification function. The two API endpoint calls (info and notification), must be made depending on whether the deployment is a Windows or 
+	Linux machine. By default, the uncommented lines are for Linux machines.
 
 The command you must execute (in the directory of the zip file once unpacked) to have the image available on the platform (after having made the above changes):
 	* Get-Content Dockerfile | docker build . -t [imageName]:[version]

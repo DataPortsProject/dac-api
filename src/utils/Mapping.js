@@ -6,6 +6,8 @@ import InspectAgentModel from '../models/InspectAgent.model';
 import PythonTemplate from '../models/PythonTemplate.model';
 import ImagesFromExternalRepositoryTemplate from '../models/ImagesFromExternalRepositoryTemplate.model';
 import DataModelObject from '../models/DataModelObject.model';
+import Notification from '../models/Notification.model';
+import InfoModel from '../models/Info.model';
 import variables from '../utils/variables';
 
 module.exports.createImagesObj = function createImagesObj(dockerImage_data) {
@@ -15,17 +17,22 @@ module.exports.createImagesObj = function createImagesObj(dockerImage_data) {
 		let repoTag = element.RepoTags;
 		if (repoTag && repoTag.length > 0) {
 			if (repoTag != '<none>:<none>' & repoTag.toString().length > 15) {
-				if (repoTag.toString().substring(0, 15) === variables.IMAGE_PATTERN_NAME) {
+				//if (element.Labels && element.Labels.ngsiagent) {
 					const img = new Image(element);
 
 					let repo = [];
 					repo = repoTag[0].split(':');
-					img.name = repo[0];
-					img.tag = repo[1];
+					if (repo.length >= 3) {
+						img.name = repo[0] + ':' + repo[1];
+						img.tag = repo[2];
+					} else {
+						img.name = repo[0];
+						img.tag = repo[1];
+					}
 					img.type = element.Labels['ngsiagent.type'] ? element.Labels['ngsiagent.type'] : '';
 
 					images.push(img);
-				}
+				//}
 			}
 		}
 	});
@@ -242,5 +249,24 @@ module.exports.updateDataModelObj = function updateDataModelObj(data) {
 	dataModel.projectName = data.projectName;
 
 	return dataModel;
+
+}
+
+module.exports.constructNotification = function constructNotification(data) {
+	const notif = new Notification();
+	notif.id = data.id;
+	notif.type = data.type;
+	notif.message = data.message;
+
+	return notif;
+
+}
+
+module.exports.constructInfoObject = function constructInfoObject(data) {
+	const info = new InfoModel();
+	info.random_id = data.random_id;
+	info.container_name = data.container_name;
+
+	return info;
 
 }

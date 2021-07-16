@@ -22,5 +22,6 @@ run pip install python-dateutil>=2.8.0
 
 ENV TIME_INTERVAL=parameter_timeInterval
 ENV TIME_UNIT=parameter_timeUnit
+ENV RANDOM_ID=parameter_random
 
 CMD ["python", "-u", "/agent/script.py"]

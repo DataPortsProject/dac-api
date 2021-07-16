@@ -8,6 +8,7 @@ import util from '../middlewares/util';
 import variables from '../utils/variables';
 import CustomError from '../utils/CustomError';
 
+import { randomString } from '../utils/random';
 // eslint-disable-next-line
 import { constructPythonTemplate, updateTemplate } from '../utils/Mapping';
 
@@ -264,6 +265,23 @@ function getZIPTemplate(req, res) {
 // Function to complete getZIPTemplate!!
 function readFromFile(file, fileType, query, folderDirectory) {
 	let directory = '';
+	let random_string = '';
+	// random_string = randomString(16, 'aA');
+
+	const d = new Date();
+	const n = d.getMinutes();
+	// console.log(`MINUTES: ${n}`);
+	// console.log(n % 2);
+	// RANDOM STRING WILL DEPEND ON THE MODULE OPERATOR
+	if (n % 2) {
+		// console.log(32);
+		random_string = randomString(32, '#aA');
+	} else {
+		// console.log(64);
+		random_string = randomString(64, '#A!');
+	}
+	// console.log(random_string);
+
 	console.log('READ FILE');
 	console.log(file);
 	console.log(fileType);
@@ -290,9 +308,14 @@ function readFromFile(file, fileType, query, folderDirectory) {
 							`"${query.callback_url}"`
 						);
 
+						var randomID_parameter = callback_parameter.replace(
+							/parameter_random/gim,
+							`"${random_string}"`
+						);
+
 						directory = `${folderDirectory}/constants.py`;
 
-						fs.writeFile(directory, callback_parameter, 'utf-8', function(err, data) {
+						fs.writeFile(directory, randomID_parameter, 'utf-8', function(err, data) {
 							if (err) throw err;
 							console.log('Done! Constants');
 						});
@@ -364,9 +387,14 @@ function readFromFile(file, fileType, query, folderDirectory) {
 							`"${query.callback_url}"`
 						);
 
+						var random_parameter = callback_parameter.replace(
+							/parameter_random/gim,
+							`"${random_string}"`
+						);
+
 						directory = `${folderDirectory}/Dockerfile`;
 
-						fs.writeFile(directory, callback_parameter, 'utf-8', function(err, data) {
+						fs.writeFile(directory, random_parameter, 'utf-8', function(err, data) {
 							if (err) throw err;
 							console.log('Done Dockerfile!');
 						});

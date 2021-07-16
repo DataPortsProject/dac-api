@@ -24,10 +24,10 @@ export function getJson(newURL) {
 
 export function getRepositoryImages() {
 	return request({
-		url: '/api/v4/projects/25/repository/tree?path=agent_images',
+		url: '/api/v4/projects/25/registry/repositories',
 		method: variables.METHOD_GET,
 		headers: {
-			'PRIVATE-TOKEN': variables.gitlab_token
+			'PRIVATE-TOKEN': variables.gitlab_images_token
 		}
 	});
 }
