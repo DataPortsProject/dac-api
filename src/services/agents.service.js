@@ -1,5 +1,5 @@
 import CustomError from '../utils/CustomError';
-import { constructAgentsObj, constructInspectAgentObj } from '../utils/Mapping';
+import { constructAgentsObj, constructInspectAgentObj, createTemplateObj } from '../utils/Mapping';
 
 /* eslint-disable */
 import {
@@ -9,7 +9,8 @@ import {
 	stopContainerCreated,
 	getLogs,
 	inspectAgents,
-	deleteAgentByID
+	deleteAgentByID,
+	inspectImageByID
 } from '../api/docker_API';
 
 const service = {};
@@ -21,6 +22,7 @@ service.stopAgent = stopAgent;
 service.getLog = getLog;
 service.inspectAgent = inspectAgent;
 service.deleteAgent = deleteAgent;
+service.getTemplate = getTemplate;
 
 export default service;
 
@@ -32,6 +34,18 @@ async function ngsiagent() {
 			const agentsData = response;
 			data = constructAgentsObj(agentsData);
 		});
+	} catch (error) {
+		throw new CustomError(error.response.data, error.response.status);
+	}
+	return data;
+}
+
+
+async function getTemplate(containerName) {
+	let data = [];
+	try {
+		const imageInfo = await inspectImageByID(containerName);
+		data = createTemplateObj(imageInfo);
 	} catch (error) {
 		throw new CustomError(error.response.data, error.response.status);
 	}

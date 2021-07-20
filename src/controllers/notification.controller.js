@@ -8,6 +8,8 @@ import { constructNotification } from '../utils/Mapping';
 
 import wsSocket from '../utils/wsSocket';
 
+import { sleep } from '../utils/utilities';
+
 const webSocket = new wsSocket(3010);
 
 /* const wss = new WebSocket.Server({ port: 8080 });
@@ -124,6 +126,7 @@ async function create(req, res) {
 		// console.log(socket);
 		const message = `${data.id},${data.type},${data.message}`;
 		socket.send(message);
+		// sleep(1000);
 	} catch (error) {
 		logger.error(error);
 		if (error instanceof CustomError) {

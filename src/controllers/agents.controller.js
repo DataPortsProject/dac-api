@@ -12,6 +12,7 @@ const router = express.Router();
 
 // routes
 router.get('/ngsiagent', ngsiagent);
+router.post('/ngsiagent/template', getTemplate);
 router.post('/ngsiagent', createAgent);
 router.patch('/ngsiagent/:id/start', startAgent);
 router.patch('/ngsiagent/:id/stop', stopAgent);
@@ -43,6 +44,36 @@ async function ngsiagent(req, res) {
 				status: 'Error',
 				message: 'An error occurred'
 			}
+		});
+	}
+	return null;
+}
+
+async function getTemplate(req, res) {
+	let agentName = req.body.containerName;
+
+	try {
+		const data = await agentsService.getTemplate(agentName);
+		res.status(200).json({
+			status: 'OK',
+			message: data
+		});
+	} catch (error) {
+		logger.error(error);
+		if (error instanceof CustomError) {
+			const { message, name, stack, type } = error;
+			// message --> error reported by Docker's API
+			// name --> name of the class (always will be 'Error')
+			// stack --> where the error is located?
+			// type --> HttpStatusCode reported by Docker's API
+			return res.status(type).json({
+				status: name,
+				message: message.message
+			});
+		}
+		return res.status(404).json({
+			status: 'Error',
+			message: 'An error occurred'
 		});
 	}
 	return null;

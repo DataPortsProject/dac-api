@@ -23,12 +23,16 @@ async function getOne(id) {
 async function getAll(query) {
 	let data = [];
 	try {
-		data = NotificationModel.find(query);
+		data = NotificationModel.find(query).sort({ createdAt: -1 });
+		/* data = data.sort((a, b) => {
+			return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+		}); */
 	} catch (error) {
 		throw new Error(error);
 	}
 	return data;
 }
+
 
 async function deleteNotification(id, query) {
 	let data = [];

@@ -29,9 +29,10 @@ module.exports.createImagesObj = function createImagesObj(dockerImage_data) {
 						img.name = repo[0];
 						img.tag = repo[1];
 					}
-					img.type = element.Labels['ngsiagent.type'] ? element.Labels['ngsiagent.type'] : '';
-
-					images.push(img);
+					img.type = element.Labels && element.Labels['ngsiagent.type'] ? element.Labels['ngsiagent.type'] : '';
+					if (img.type !== '') {
+						images.push(img);
+					}
 				//}
 			}
 		}
@@ -257,6 +258,7 @@ module.exports.constructNotification = function constructNotification(data) {
 	notif.id = data.id;
 	notif.type = data.type;
 	notif.message = data.message;
+	notif.register = data.register;
 
 	return notif;
 

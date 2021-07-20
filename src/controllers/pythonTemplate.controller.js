@@ -24,7 +24,7 @@ router.get('/:id', getPythonTemplate);
 router.post(
 	'/',
 	[
-		check('source').isIn(['agent-api', 'agent-local-txt']),
+		check('source').isIn(['agent-api', 'agent-local-txt', 'agent-local-excel']),
 		check('type').isIn(['publish-subscribe', 'on-demand'])
 	],
 	util.sendValidations,
@@ -34,7 +34,7 @@ router.delete('/:id', deletePythonTemplate);
 router.put(
 	'/:id',
 	[
-		check('source').isIn(['agent-api', 'agent-local-txt']),
+		check('source').isIn(['agent-api', 'agent-local-txt', 'agent-local-excel']),
 		check('type').isIn(['publish-subscribe', 'on-demand'])
 	],
 	util.sendValidations,
@@ -365,9 +365,17 @@ function readFromFile(file, fileType, query, folderDirectory) {
 							query.filepath
 						);
 
+						// File Name parameter
+						var fileNameParameter = filePathParameter.replace(
+							/parameter_fileName/gim,
+							query.filename
+						);
+
+						console.log(`FILEPATH: ${query.filepath}`);
+
 						directory = `${folderDirectory}/script.py`;
 
-						fs.writeFile(directory, filePathParameter, 'utf-8', function(err, data) {
+						fs.writeFile(directory, fileNameParameter, 'utf-8', function(err, data) {
 							if (err) throw err;
 							console.log('Done Script!');
 						});

@@ -48,7 +48,7 @@ class TxtClass:
     
     except Exception as ex:
       print('ERROR: ',ex.args)
-      sendNotification('error', ex.args)
+      sendNotification('ERROR', ex.args, '')
 
     return cls
 
@@ -73,11 +73,11 @@ def build_entity(row: Row) -> DataModel:
 
   except Exception as ex:
     print('ERROR: ',ex.args)
-    sendNotification('error', ex.args)
+    sendNotification('ERROR', ex.args, '')
 
   return m
 
-def sendNotification(notificationType, messageText):
+def sendNotification(notificationType, messageText, messageSended):
 
   try:
     
@@ -104,7 +104,8 @@ def sendNotification(notificationType, messageText):
     data = {
       "id": container_name,
       "type": notificationType,
-      "message": messageText
+      "message": messageText,
+      "register": messageSended
     }
 
     #Next line is for Windows deployment
@@ -124,7 +125,7 @@ def main():
 
   try:
 
-    sendNotification('success', 'Agent execution begins.')
+    sendNotification('SUCCESS', 'Agent execution begins.', '')
 
     print("Let's read the local file")
     src = Source.from_file("parameter_filePath")
@@ -133,8 +134,8 @@ def main():
 
     #There are two options for sending data to the callback url.
 
-    #1st send all data in one post request (lines 140 to 146)
-    #2nd send data after each iteration of the data source (lines 148 to 152)
+    #1st send all data in one post request (lines 140 to 148)
+    #2nd send data after each iteration of the data source (lines 150 to 155)
     #Choose one of them and comment the other one
 
     for row in src:
@@ -145,17 +146,18 @@ def main():
     #SEND DATA TO CALLBACK URL IN JSON FORMAT
     requests.post(callback_url, json=arrayJson)
 
+    sendNotification('SUCCESS', 'Agent execution ends.', arrayJson.json())
+
     for row in src:
       #build data model
       dataModel = build_entity(row)
       #Send data in json format
       requests.post(callback_url, json=dataModel)
-    
-    sendNotification('success', 'Agent execution ends.')
+      sendNotification('SUCCESS', 'Agent execution ends.', dataModel.json())
 
   except Exception as ex:
     print('ERROR: ',ex.args)
-    sendNotification('error', ex.args)
+    sendNotification('ERROR', ex.args, '')
 
 if __name__ == '__main__':
     lon = len(sys.argv)#Length of input variables

@@ -10,7 +10,8 @@ const mySchema = new Schema(
 		},
 		message: {
 			type: 'String'
-		}
+		},
+		register: { type: 'Mixed' }
 	},
 	{
 		autoCreate: true,

@@ -1,3 +1,4 @@
+Note that the SDK is an aid to agent development. The generated code will never be the final code and some adjustments will have to be made.
 Before to execute the python script the following points:
 	- Read all comments on the generated files. In addition to indicating what is being done, some contain comments on how to complete code snippets, comment out or uncomment some code snippets.
 	- That all the parameters have been replaced by the values indicated in the last step of the Wizard.

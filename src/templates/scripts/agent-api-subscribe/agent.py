@@ -36,7 +36,7 @@ def DataModel_response(register):
 
     except Exception as ex:
         print('ERROR: ',ex.args)
-        sendNotification('error', ex.args)
+        sendNotification('ERROR', ex.args, '')
 
     return m
 
@@ -44,17 +44,17 @@ def build_entity(row: Row) -> DataModel:
 
     try:
 
-        sendNotification('success', 'Agent execution begins.')
+        sendNotification('SUCCESS', 'Agent execution begins.', '')
 
         response = executeQuery()
 
         model = DataModel_response(response)
 
+        sendNotification('SUCCESS', 'Agent execution ends.', model.json())
+
     except Exception as ex:
         print('ERROR: ',ex.args)
-        sendNotification('error', ex.args)
-
-    sendNotification('success', 'Agent execution ends.')
+        sendNotification('ERROR', ex.args, '')
 
     return model
 
@@ -68,11 +68,11 @@ def executeQuery():
     
     except Exception as ex:
         print('ERROR: ',ex.args)
-        sendNotification('error', ex.args)
+        sendNotification('ERROR', ex.args, '')
 
     return response
 
-def sendNotification(notificationType, messageText):
+def sendNotification(notificationType, messageText, messageSended):
 
     try:
 
@@ -99,8 +99,9 @@ def sendNotification(notificationType, messageText):
         data = {
             "id": container_name,
             "type": notificationType,
-            "message": messageText
-            }
+            "message": messageText,
+            "register": messageSended
+        }
         #Next line is for Windows deployment
         #query = requests.post("http://host.docker.internal:3000/notification", data = data)
 
@@ -156,7 +157,7 @@ def main():
         print('ERROR: ',ex.args)
         #print(type(ex))
         #print(ex)
-        sendNotification('error', ex.args)
+        sendNotification('ERROR', ex.args, '')
 
 if __name__ == '__main__':
     #---  LOAD THE ENVIRONMENTAL VARIABLES ---

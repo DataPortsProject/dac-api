@@ -35,7 +35,7 @@ def build_entity(register):
 
     except Exception as ex:
         print('ERROR: ',ex.args)
-        sendNotification('error', ex.args)
+        sendNotification('ERROR', ex.args, '')
     
     return m
 
@@ -49,11 +49,11 @@ def executeQuery():
 
     except Exception as ex:
         print('ERROR: ',ex.args)
-        sendNotification('error', ex.args)
+        sendNotification('ERROR', ex.args, '')
 
     return response
 
-def sendNotification(notificationType, messageText):
+def sendNotification(notificationType, messageText, messageSended):
 
     try:
 
@@ -80,8 +80,9 @@ def sendNotification(notificationType, messageText):
         data = {
             "id": container_name,
             "type": notificationType,
-            "message": messageText
-            }
+            "message": messageText,
+            "register": messageSended
+        }
         
         #Next line is for Windows deployment
         #query = requests.post("http://host.docker.internal:3000/notification", data = data)
@@ -100,14 +101,14 @@ def main():
 
     try:
 
-        sendNotification('success', 'Agent execution begins.')
+        sendNotification('SUCCESS', 'Agent execution begins.', '')
 
         arrayJson = []
 
         #There are two options for sending data to the callback url.
 
-        #1st send all data in one request (lines 113 to 120)
-        #2nd send data after each iteration of the data source (lines 122 to 126)
+        #1st send all data in one request (lines 113 to 122)
+        #2nd send data after each iteration of the data source (lines 124 to 129)
         #Choose one of them and comment the other one
         
         for i in [0, 1]:
@@ -119,19 +120,20 @@ def main():
         #SEND DATA TO CALLBACK URL IN JSON FORMAT
         requests.post(callback_url, json=arrayJson)
 
+        sendNotification('SUCCESS', 'Agent execution ends.', arrayJson.json())
+
         for i in [0, 1]:
             response = executeQuery()
             print(response)
             dataModel = build_entity(response)
             requests.post(callback_url, json=dataModel)
-
-        sendNotification('success', 'Agent execution ends.')
+            sendNotification('SUCCESS', 'Agent execution ends.', dataModel.json())
     
     except Exception as ex:
         print('ERROR: ',ex.args)
         #print(type(ex))
         #print(ex)
-        sendNotification('error', ex.args)
+        sendNotification('ERROR', ex.args, '')
 
 if __name__ == '__main__':
     lon = len(sys.argv)#Length of input variables
