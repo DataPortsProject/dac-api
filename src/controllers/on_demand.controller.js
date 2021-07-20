@@ -6,12 +6,13 @@ import agentService from '../services/agents.service';
 import infoService from '../services/info.service';
 
 import { requestContainerObj } from '../utils/Mapping';
+import CustomError from '../utils/CustomError';
 
 const router = express.Router();
 
 // routes
 router.post('/createContainer', createContainer);
-//router.post('/latestValues', latestValues);
+// router.post('/latestValues', latestValues);
 router.post('/', historicalValues);
 
 export default router;
@@ -24,20 +25,20 @@ async function historicalValues(req, res) {
 	console.log(query);
 
 	try {
-		const name = req.body.name;
+		const { name } = req.body;
 
 		// Hacemos el getTemplate para obtener el random_id
 		const template = await agentService.getTemplate(name);
-		let random_id = "";
+		let random_id = '';
 		template.environment.forEach(env => {
-			if (env.key === "RANDOM_ID") {
+			if (env.key === 'RANDOM_ID') {
 				random_id = env.value;
 			}
 		});
 
 		// Hacemos una insercion en mongo
 		const mongoObj = {
-			random_id: random_id,
+			random_id,
 			container_name: name
 		};
 
@@ -59,12 +60,11 @@ async function historicalValues(req, res) {
 				status: name,
 				message: message.message
 			});
-		} else {
-			return res.status(404).json({
-				status: 'Error',
-				message: 'An error occurred'
-			});
 		}
+		return res.status(404).json({
+			status: 'Error',
+			message: 'An error occurred'
+		});
 	}
 }
 
@@ -72,7 +72,7 @@ async function createContainer(req, res) {
 	const query = requestContainerObj(req.body);
 
 	try {
-		const name = req.body.name;
+		const { name } = req.body;
 		const container = await onDemandService.createContainer(name, query);
 		console.log(container);
 
@@ -92,12 +92,11 @@ async function createContainer(req, res) {
 				status: name,
 				message: message.message
 			});
-		} else {
-			return res.status(404).json({
-				status: 'Error',
-				message: 'An error occurred'
-			});
 		}
+		return res.status(404).json({
+			status: 'Error',
+			message: 'An error occurred'
+		});
 	}
 	return null;
 }
