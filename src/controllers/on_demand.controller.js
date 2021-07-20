@@ -24,10 +24,12 @@ async function historicalValues(req, res) {
 	const query = requestContainerObj(req.body);
 
 	try {
-		const { name } = req.body.name;
+		let name = '';
+		name = req.body.name;
 
 		// Hacemos el getTemplate para obtener el random_id
-		const template = await agentService.getTemplate(name);
+		const template = await agentService.getTemplate(query.Image);
+
 		let random_id_env = '';
 		template.environment.forEach(env => {
 			if (env.key === 'RANDOM_ID') {
