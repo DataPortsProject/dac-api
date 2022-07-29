@@ -13,6 +13,8 @@ router.get('/:id', getOne);
 router.get('/', getAll);
 router.post('/', create);
 router.delete('/:id', deleteInfo);
+router.post('/filtered', getFiltered);
+router.delete('/container/:id', deleteInfoByContainer);
 
 export default router;
 
@@ -93,6 +95,66 @@ async function deleteInfo(req, res) {
 		});
 	}
 	return null;
+}
+
+async function deleteInfoByContainer(req, res) {
+	const { params: { id } = { id: null } } = req;
+
+	try {
+ 
+   console.log('DELETE INFO BY CONTAINER')
+   console.log(id)
+
+		const data = await infoService.deleteInfoByContainer(id);
+		res.status(200).json({
+			status: 'OK',
+			message: data
+		});
+	} catch (error) {
+		logger.error(error);
+		if (error instanceof CustomError) {
+			const { message, name, stack, type } = error;
+			return res.status(type).json({
+				status: name,
+				message: message.message
+			});
+		}
+		return res.status(404).json({
+			status: 'Error',
+			message: 'An error occurred'
+		});
+	}
+	return null; 
+}
+
+async function getFiltered(req, res) {
+
+  try {
+	  const id = req.body.random_id;
+	  const interval = req.body.time_interval;
+	  const unit = req.body.time_unit;
+
+	  const data = await infoService.getFiltered(id, interval, unit);
+    res.status(200).json({
+		  status: 'OK',
+		  message: data
+	  });
+
+  } catch (error) {
+	  logger.error(error);
+	  if (error instanceof CustomError) {
+		  const { message, name, stack, type } = error;
+		  return res.status(type).json({
+			  status: name,
+			  message: message.message
+		  });
+	  }
+	  return res.status(404).json({
+		  status: 'Error',
+		  message: 'An error occurred'
+	  });
+  }
+  return null;
 }
 
 async function create(req, res) {

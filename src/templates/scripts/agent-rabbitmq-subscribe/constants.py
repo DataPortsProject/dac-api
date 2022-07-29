@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 #-- Environmental variables
-CALLBACK_URL = parameter_CallbackURL
+TIME_INTERVAL = 0
+TIME_UNIT = 'No Units'
 RANDOM_ID = parameter_random
 PRIVATE_REPOSITORY = parameter_isPrivateRepository
 URL_PUBLIC_REPOSITORY = parameter_urlPublicRepository

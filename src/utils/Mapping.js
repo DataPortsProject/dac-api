@@ -30,7 +30,9 @@ module.exports.createImagesObj = function createImagesObj(dockerImage_data) {
 						img.tag = repo[1];
 					}
 					img.type = element.Labels && element.Labels['ngsiagent.type'] ? element.Labels['ngsiagent.type'] : '';
-					if (img.type !== '') {
+					const isDataportsImg = element.Labels && element.Labels['ngsiagent.project'] && element.Labels['ngsiagent.project'] === 'dataports' ? true : false;
+					// const isDataportsImg = element.Labels && element.Labels['ngsiagent.type'] ? true : false;
+					if (isDataportsImg) {
 						images.push(img);
 					}
 				//}
@@ -268,6 +270,8 @@ module.exports.constructInfoObject = function constructInfoObject(data) {
 	const info = new InfoModel();
 	info.random_id = data.random_id;
 	info.container_name = data.container_name;
+	info.time_interval = data.time_interval;
+	info.time_unit = data.time_unit;
 
 	return info;
 

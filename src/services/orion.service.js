@@ -4,7 +4,9 @@
 	deleteEntities,
 	getSubscriptions,
 	checkDatasource,
-	getAgentsAsociated
+	getAgentsAsociated,
+	createSubscription,
+	deleteSubscriptions
 } from '../api/orion';
 import CustomError from '../utils/CustomError';
 
@@ -16,6 +18,8 @@ service.deleteEntity = deleteEntity;
 service.getORIONSubscription = getORIONSubscription;
 service.checkORIONDatasource = checkORIONDatasource;
 service.getORIONAgentsAsociated = getORIONAgentsAsociated;
+service.createSubscriptions = createSubscriptions;
+service.deleteSubscription = deleteSubscription;
 
 export default service;
 
@@ -26,7 +30,8 @@ async function getEntitiesByType(type) {
 		orionEntities = await entitiesByType(type);
 	} catch (error) {
 		// properties mapped to ORION errors
-		throw new CustomError(error.response.data.description, error.response.status);
+		// throw new CustomError(error.response.data.description, error.response.status);
+		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
 	}
 	return orionEntities;
 }
@@ -37,7 +42,26 @@ async function createEntity(entity) {
 		orionEntity = await createEntities(entity);
 	} catch (error) {
 		// properties mapped to ORION errors
-		throw new CustomError(error.response.data.description, error.response.status);
+		// throw new CustomError(error.response.data.description, error.response.status);
+		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
+	}
+	return orionEntity;
+}
+
+async function createSubscriptions(entity) {
+	let orionEntity = null;
+
+	try {
+		// orionEntity = await createSubscription(entity);
+		// console.log(orionEntity);
+		await createSubscription(JSON.stringify(entity)).then(response => {
+			console.log(response);
+			orionEntity = response;
+		}) 
+	} catch (error) {
+		// properties mapped to ORION errors
+		// throw new CustomError(error.response.data.description, error.response.status);
+		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
 	}
 	return orionEntity;
 }
@@ -48,9 +72,20 @@ async function deleteEntity(ID) {
 		orionEntity = await deleteEntities(ID);
 	} catch (error) {
 		// properties mapped to ORION errors
-		throw new CustomError(error.response.data.description, error.response.status);
+		// throw new CustomError(error.response.data.description, error.response.status);
+		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
 	}
 	return orionEntity;
+}
+
+async function deleteSubscription(ID) {
+	let subscriptionEntity = null;
+	try {
+		subscriptionEntity = await deleteSubscriptions(ID);
+	} catch (error) {
+		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
+	}
+	return subscriptionEntity;
 }
 
 async function getORIONSubscription() {
@@ -59,7 +94,8 @@ async function getORIONSubscription() {
 		orionSubscriptions = await getSubscriptions();
 	} catch (error) {
 		// properties mapped to ORION errors
-		throw new CustomError(error.response.data.description, error.response.status);
+		// throw new CustomError(error.response.data.description, error.response.status);
+		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
 	}
 	return orionSubscriptions;
 }
@@ -71,7 +107,8 @@ async function checkORIONDatasource(entityType, datasourceId) {
 			data = response;
 		});
 	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
+		// throw new CustomError(error.response.data, error.response.status);
+		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
 	}
 	return data;
 }
@@ -83,7 +120,8 @@ async function getORIONAgentsAsociated(agentType, dataSourceId) {
 			data = response;
 		});
 	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
+		// throw new CustomError(error.response.data, error.response.status);
+		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
 	}
 	return data;
 }

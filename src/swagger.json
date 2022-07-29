@@ -17,29 +17,37 @@
 	"basePath": "/",
 	"tags": [
 		{
-			"name": "default",
-			"description": "API for users in the system"
+			"name": "Images",
+			"description": "Methods to work with the images of the agents"
 		},
 		{
-			"name": "pubsub",
-			"description": "API for publish subscribe agents"
+			"name": "On-demand",
+			"description": "Methods to call on-demand agents"
 		},
 		{
-			"name": "agents",
-			"description": "API for agents/containers services"
+			"name": "NGSI Agent",
+			"description": "Methods to manage the NGSI Agents"
+		},
+		{
+			"name": "Notification",
+			"description": "Method for manage the notifications as a result of execution of the NGSI Agents"
+		},
+		{
+			"name": "ORION",
+			"description": "Method to interact with ORION"
 		}
 	],
 	"schemes": [
 		"http"
 	],
 	"paths": {
-		"/onDemand": {
+		"/on_demand": {
 			"post": {
 				"tags": [
-					"default"
+					"On-demand"
 				],
 				"summary": "Create an on demand agent",
-				"description": "",
+				"description": "Method called from Semantic & Interoperability Component to create an On-demand agent",
 				"operationId": "createOnDemand",
 				"consumes": [
 					"application/json"
@@ -62,258 +70,133 @@
 					"200": {
 						"description": "succesful operation",
 						"schema": {
-							"$ref": "#/definitions/OnDemand"
+							"$ref": "#/definitions/GenericAnswer"
 						}
 					},
-					"400": {
-						"description": "Image not found"
-					},
-					"500": {
-						"description": "Internal error"
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
 					}
-				},
-				"security": [
-					{
-						"apikey": []
-					}
-				]
+				}
 			}
 		},
 		"/images": {
 			"get": {
 				"tags": [
-					"default"
+					"Images"
 				],
 				"summary": "Returns the images availables on this host",
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "succesful operation",
 						"schema": {
-							"$ref": "#/definitions/Image"
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
 						}
 					}
 				}
 			}
 		},
-		"/ngsiagent": {
+		"/images/{id}/config_datasource": {
 			"get": {
 				"tags": [
-					"default"
+					"Images"
 				],
-				"summary": "Returns the list",
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/NGSIAgent"
-						}
-					}
-				}
-			},
-			"post": {
-				"tags": [
-					"default"
-				],
-				"summary": "Create an NGSI Agent",
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/NGSIAgent"
-						}
-					}
-				}
-			}
-		},
-		"/ngsiagent/{id}": {
-			"parameters": [
-				{
-					"name": "id",
-					"in": "path",
-					"required": true,
-					"description": "ID of the agent that we want to delete",
-					"type": "string"
-				}
-			],
-			"delete": {
-				"summary": "Delete an NGSI Agent",
-				"tags": [
-					"default"
-				],
-				"responses": {
-					"200": {
-						"description": "Agent is deleted"
-					}
-				}
-			},
-			"get": {
-				"summary": "Returns the detail of an NGSI Agent",
-				"tags": [
-					"default"
-				],
+				"summary": "Returns a DataSource object with information about an image",
 				"parameters": [
 					{
 						"name": "id",
 						"in": "path",
-						"description": "The id of the ngsiagent",
-						"schema": {
-							"$ref": ""
-						}
+						"required": true,
+						"description": "ID of the image that we want to retrieve its datasource",
+						"type": "string"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "User is updated",
+						"description": "succesful operation",
 						"schema": {
-							"$ref": ""
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
 						}
 					}
 				}
 			}
 		},
-		"/pubsub/getTemplate": {
+		"/images/{id}/template": {
 			"get": {
 				"tags": [
-					"pubsub"
+					"Images"
 				],
 				"operationId": "getTemplate",
 				"produces": [
 					"application/json"
 				],
 				"summary": "Returns a template for creating an agent",
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/containerTemplate"
-						}
-					},
-					"400": {
-						"description": "Couldn't retrieve a template"
-					},
-					"500": {
-						"description": "Internal error"
-					}
-				}
-			}
-		},
-		"/pubsub/createContainer": {
-			"post": {
-				"tags": [
-					"pubsub"
-				],
-				"summary": "Creates and start an agent container",
-				"operationId": "createContainer",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
 				"parameters": [
 					{
-						"in": "body",
-						"name": "body",
-						"description": "Creates and start an agent container",
+						"name": "id",
+						"in": "path",
 						"required": true,
-						"schema": {
-							"$ref": "#/definitions/containerTemplate"
-						}
+						"description": "ID of the image that we want to retrieve its template",
+						"type": "string"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "succesful operation",
 						"schema": {
-							"$ref": "#/definitions/createContainer"
+							"$ref": "#/definitions/GenericAnswer"
 						}
 					},
-					"400": {
-						"description": "Bad parameter"
-					},
-					"409": {
-						"description": "Conflict"
-					},
-					"500": {
-						"description": "Internal error"
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
 					}
 				}
 			}
 		},
-		"/pubsub/startContainer": {
-			"post": {
+		"/images/{id}": {
+			"delete": {
 				"tags": [
-					"pubsub"
+					"Images"
 				],
-				"summary": "Starts an agent container given the id",
-				"operationId": "startContainer",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
+				"summary": "Deletes an image",
 				"parameters": [
 					{
-						"in": "body",
-						"name": "body",
-						"description": "Start an agent container"
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the image that we want to delete",
+						"type": "string"
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "succesful operation",
 						"schema": {
-							"$ref": "#/definitions/startContainerResponse"
+							"$ref": "#/definitions/GenericAnswer"
 						}
 					},
-					"304": {
-						"description": "Container already started"
-					},
 					"404": {
-						"description": "No such container"
-					},
-					"500": {
-						"description": "Internal error"
-					}
-				}
-			}
-		},
-		"/pubsub/stopContainer": {
-			"post": {
-				"tags": [
-					"pubsub"
-				],
-				"summary": "Stops an agent container given the id",
-				"operationId": "stopContainer",
-				"consumes": [
-					"application/json"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"in": "body",
-						"name": "body",
-						"description": "Stops a container"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
+						"description": "Generic error",
 						"schema": {
-							"$ref": "#/definitions/stopContainerResponse"
+							"$ref": "#/definitions/GenericMessage"
 						}
-					},
-					"304": {
-						"description": "Container already stopped"
-					},
-					"404": {
-						"description": "No such container"
-					},
-					"500": {
-						"description": "Internal error"
 					}
 				}
 			}
@@ -321,34 +204,32 @@
 		"/agents/ngsiagent": {
 			"get": {
 				"tags": [
-					"agents"
+					"NGSI Agent"
 				],
-				"operationId": "ngsiagent",
 				"produces": [
 					"application/json"
 				],
 				"summary": "Returns all agents on the system",
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "succesful operation",
 						"schema": {
-							"$ref": "#/definitions/ngsiagent"
+							"$ref": "#/definitions/GenericAnswer"
 						}
 					},
-					"400": {
-						"description": "Bad parameter"
-					},
-					"500": {
-						"description": "Server error"
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
 					}
 				}
 			},
 			"post": {
 				"tags": [
-					"agents"
+					"NGSI Agent"
 				],
 				"summary": "Creates and starts an agent given a template",
-				"operationId": "ngsiagent_create",
 				"consumes": [
 					"application/json"
 				],
@@ -367,103 +248,16 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK",
-						"schema": {}
-					},
-					"400": {
-						"description": "Bad parameter"
-					},
-					"404": {
-						"description": "No such container"
-					},
-					"409": {
-						"description": "Conflict"
-					},
-					"500": {
-						"description": "Server error"
-					}
-				}
-			}
-		},
-		"/agents/ngsiagent/{id}/start": {
-			"patch": {
-				"tags": [
-					"agents"
-				],
-				"operationId": "start",
-				"produces": [
-					"application/json"
-				],
-				"parameters": {
-					"in": "path",
-					"name": "id",
-					"required": true,
-					"schema": {
-						"properties": {
-							"id": {
-								"type": "string"
-							}
-						}
-					}
-				},
-				"summary": "Starts the specified agent on the url",
-				"responses": {
-					"200": {
-						"description": "OK",
+						"description": "succesful operation",
 						"schema": {
-							"properties": {
-								"id": {
-									"type": "string"
-								}
-							}
+							"$ref": "#/definitions/GenericAnswer"
 						}
 					},
-					"304": {
-						"description": "Container already started"
-					},
 					"404": {
-						"description": "No such container"
-					},
-					"500": {
-						"description": "Server error"
-					}
-				}
-			}
-		},
-		"/agents/ngsiagent/{id}/stop": {
-			"patch": {
-				"tags": [
-					"agents"
-				],
-				"operationId": "stop",
-				"produces": [
-					"application/json"
-				],
-				"parameters": {
-					"in": "path",
-					"name": "id",
-					"required": true,
-					"schema": {
-						"properties": {
-							"id": {
-								"type": "string"
-							}
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
 						}
-					}
-				},
-				"summary": "Stops the specified agent on the url",
-				"responses": {
-					"200": {
-						"description": "OK"
-					},
-					"304": {
-						"description": "Container already stoped"
-					},
-					"404": {
-						"description": "No such container"
-					},
-					"500": {
-						"description": "Server error"
 					}
 				}
 			}
@@ -471,37 +265,99 @@
 		"/agents/ngsiagent/{id}": {
 			"delete": {
 				"tags": [
-					"agents"
+					"NGSI Agent"
 				],
-				"operationId": "delete",
+				"summary": "Deletes an NGSI Agent",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the agent that we want to delete",
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/agents/ngsiagent/{id}/start": {
+			"patch": {
+				"tags": [
+					"NGSI Agent"
+				],
 				"produces": [
 					"application/json"
 				],
-				"parameters": {
-					"in": "path",
-					"name": "id",
-					"required": true,
-					"schema": {
-						"properties": {
-							"id": {
-								"type": "string"
-							}
-						}
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the agent that we want to start",
+						"type": "string"
 					}
-				},
-				"summary": "Delete the specified agent on the url",
+				],
+				"summary": "Starts the specified agent on the url",
 				"responses": {
 					"200": {
-						"description": "OK"
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
 					},
-					"400": {
-						"description": "Bad parameter"
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/agents/ngsiagent/{id}/stop": {
+			"patch": {
+				"tags": [
+					"NGSI Agent"
+				],
+				"operationId": "stop",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the agent that we want to stop",
+						"type": "string"
+					}
+				],
+				"summary": "Stops the specified agent on the url",
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
 					},
-					"409": {
-						"description": "Conflict"
-					},
-					"500": {
-						"description": "Server error"
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
 					}
 				}
 			}
@@ -509,41 +365,34 @@
 		"/agents/ngsiagent/{id}/log": {
 			"get": {
 				"tags": [
-					"agents"
+					"NGSI Agent"
 				],
 				"operationId": "log",
 				"produces": [
 					"application/json"
 				],
-				"parameters": {
-					"in": "path",
-					"name": "id",
-					"required": true,
-					"schema": {
-						"properties": {
-							"id": {
-								"type": "string"
-							}
-						}
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the agent that we want to recover its log",
+						"type": "string"
 					}
-				},
+				],
 				"summary": "Return the logs of the specified agent on the url",
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "succesful operation",
 						"schema": {
-							"properties": {
-								"message": {
-									"type": "string"
-								}
-							}
+							"$ref": "#/definitions/GenericAnswer"
 						}
 					},
 					"404": {
-						"description": "No such container"
-					},
-					"500": {
-						"description": "Server error"
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
 					}
 				}
 			}
@@ -551,37 +400,344 @@
 		"/agents/ngsiagent/{id}/inspect": {
 			"get": {
 				"tags": [
-					"agents"
+					"NGSI Agent"
 				],
 				"operationId": "inspect",
 				"produces": [
 					"application/json"
 				],
-				"parameters": {
-					"in": "path",
-					"name": "id",
-					"required": true,
-					"schema": {
-						"properties": {
-							"id": {
-								"type": "string"
-							}
-						}
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the agent that we want to inspect",
+						"type": "string"
 					}
-				},
+				],
 				"summary": "Returns de most relevant information of an agent",
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "succesful operation",
 						"schema": {
-							"$ref": "#/definitions/inspect"
+							"$ref": "#/definitions/GenericAnswer"
 						}
 					},
 					"404": {
-						"description": "No such container"
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/notification": {
+			"get": {
+				"tags": [
+					"Notification"
+				],
+				"summary": "Returns all the notifications available in the system",
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
 					},
-					"500": {
-						"description": "Server error"
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/notification/{id}": {
+			"get": {
+				"tags": [
+					"Notification"
+				],
+				"summary": "Returns a specific notification",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the notification that we want to retrieve",
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"Notification"
+				],
+				"summary": "Deletes a Notification",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the notification that we want to delete",
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/orion/{id}": {
+			"delete": {
+				"tags": [
+					"ORION"
+				],
+				"summary": "Deletes a NGSI entity",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the entity that we want to delete",
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/orion/subscription/{id}": {
+			"delete": {
+				"tags": [
+					"ORION"
+				],
+				"summary": "Deletes a subscription ",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "ID of the subscription that we want to delete",
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/orion/getSubscriptions": {
+			"get": {
+				"tags": [
+					"ORION"
+				],
+				"summary": "Returns all the subscriptions available in the system",
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/orion/getAgentsAsociated": {
+			"get": {
+				"tags": [
+					"ORION"
+				],
+				"summary": "Returns agents associated to the entry parameters",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Create an on demand agent",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/getAgents"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/orion/{type}/entitiesByType": {
+			"get": {
+				"tags": [
+					"ORION"
+				],
+				"summary": "Recover entities by type",
+				"parameters": [
+					{
+						"name": "type",
+						"in": "path",
+						"required": true,
+						"description": "type of the entity that we want to recover",
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/orion/createSubscriptions": {
+			"post": {
+				"tags": [
+					"ORION"
+				],
+				"summary": "Creates a subscription",
+				"description": "Method called for creating subscriptions",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Create an on demand agent",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Subscription"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
+					}
+				}
+			}
+		},
+		"/orion/createEntity": {
+			"post": {
+				"tags": [
+					"ORION"
+				],
+				"summary": "Creates an entity",
+				"description": "Method called for creating entities",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Creates an entity in ORION",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/DataSource"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "succesful operation",
+						"schema": {
+							"$ref": "#/definitions/GenericAnswer"
+						}
+					},
+					"404": {
+						"description": "Generic error",
+						"schema": {
+							"$ref": "#/definitions/GenericMessage"
+						}
 					}
 				}
 			}
@@ -597,78 +753,150 @@
 	"definitions": {
 		"OnDemand": {
 			"type": "object",
-			"properties": {
-				"source": {
-					"type": "string"
-				},
-				"agent": {
-					"type": "string"
-				},
-				"data_model": {
-					"type": "string"
-				},
-				"callBack_url": {
-					"type": "string"
-				}
-			}
-		},
-		"Image": {
-			"required": [
-				"tag",
-				"id"
-			],
-			"properties": {
-				"tag": {
-					"type": "string"
-				},
-				"id": {
-					"type": "string"
-				}
-			}
-		},
-		"NGSIAgent": {
 			"required": [
 				"name",
-				"type",
-				"image"
+				"image",
+				"environment"
 			],
 			"properties": {
 				"name": {
 					"type": "string"
 				},
-				"id": {
+				"image": {
 					"type": "string"
 				},
-				"type": {
+				"environment": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"key": {
+								"type": "string"
+							},
+							"value": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		},
+		"Image": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"Id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"tag": {
+						"type": "string"
+					},
+					"created": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"type": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"DataSource": {
+			"properties": {
+				"Id": {
 					"type": "string"
 				},
 				"image": {
+					"type": "string"
+				},
+				"dataSource": {
+					"type": "string"
+				},
+				"agentType": {
 					"type": "string"
 				}
 			}
 		},
-		"containerTemplate": {
-			"required": [
-				"env",
-				"tag",
-				"image",
-				"containerName"
-			],
+		"GenericMessage": {
 			"properties": {
-				"env": {
+				"status": {
+					"type": "string"
+				},
+				"message": {
+					"type": "string"
+				}
+			}
+		},
+		"GenericAnswer": {
+			"properties": {
+				"status": {
+					"type": "string"
+				},
+				"message": {
 					"type": "array",
 					"items": {
 						"type": "string"
 					}
+				}
+			}
+
+		},
+		"ngsiagent": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"properties": {
+					"Id": {
+						"type": "string"
+					},
+					"Names": {
+						"type": "string"
+					},
+					"Image": {
+						"type": "string"
+					},
+					"ImageID": {
+						"type": "string"
+					},
+					"Status": {
+						"type": "string"
+					},
+					"StatusCode": {
+						"type": "string"
+					},
+					"AgentType": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"getAgents": {
+			"properties": {
+				"agentType": {
+					"type": "string"
+				},
+				"dataSourceId": {
+					"type": "string"
+				}
+			}
+		},
+		"Template": {
+			"properties": {
+				"Id": {
+					"type": "string"
 				},
 				"image": {
 					"type": "string"
 				},
-				"tag": {
-					"type": "string"
-				},
-				"containername": {
-					"type": "string"
+				"environment": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
 				}
 			}
 		},
@@ -704,25 +932,25 @@
 				}
 			}
 		},
-		"stopContainerResponse": {
+		"Subscription": {
 			"properties": {
-				"message": {
+				"id": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"notificationURL": {
 					"type": "string"
 				}
 			}
 		},
-		"ngsiagent": {
+		"stopContainerResponse": {
 			"properties": {
-				"Id": {
-					"type": "string"
-				},
-				"Names": {
-					"type": "string"
-				},
-				"Status": {
-					"type": "string"
-				},
-				"Image": {
+				"message": {
 					"type": "string"
 				}
 			}

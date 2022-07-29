@@ -2,7 +2,7 @@ FROM python:3.8.3-slim-buster
 
 LABEL ngsiagent.project="dataports"
 #next label is to indicate the agent type
-LABEL ngsiagent.type="publish-subscribe"
+LABEL ngsiagent.type="on_demand"
 #next label is the DataSource file serialized to string
 LABEL ngsiagent.datasource_configuration='parameter_dataModelSerialized'
 LABEL MAINTAINER jclemente@prodevelop.es
@@ -30,8 +30,7 @@ RUN pip install jsonschema
 
 #environmental variables. In the publish-subscribe at least time_interval and time_unit are mandatories
 
-ENV TIME_INTERVAL=parameter_timeInterval
-ENV TIME_UNIT=parameter_timeUnit
+ENV CALLBACK_URL=parameter_CallbackURL
 ENV RANDOM_ID=parameter_random
 
 CMD ["python", "-u", "/agent/script.py"]

@@ -6,8 +6,13 @@ export default {
 	// para desarrollo en local
 	local_DOCKER_API: 'http://localhost:2375',
 	// URL Orion UPV
-	baseURL_ORION_UPV: 'http://158.42.188.129:8080',
+	// baseURL_ORION_UPV: 'http://158.42.188.129:8080',
+	baseURL_ORION_UPV: 'http://host.docker.internal:1026',
 	baseURL_ORION_LOCAL: 'http://localhost:1026',
+	baseURL_CYGNUS: 'http://localhost:5055',
+	// la siguiente URL es la IP publica de la máquina de ICCS
+	// baseURL_CYGNUS: 'http://147.102.19.90:5055',
+	baseURL_nodeRED: 'http://147.102.19.90:1880',
 	// image pattern name
 	IMAGE_PATTERN_NAME: 'dataportsh2020/',
 	GITLAB_IMAGE_PATTERN_NAME: 'egitlab.iti.es:5050/ivela/images',
@@ -34,7 +39,7 @@ export default {
 		'PYTHON_GET_PIP_SHA256'
 	],
 	gitlab_url: 'http://egitlab.iti.upv.es',
-	gitlab_token: 'D3-5YV3H1Zk7heVsnzX7',
+	gitlab_token: 'glpat-LFqfBGCyGYxzwP_nLBkL',
 	gitlab_images_token: 'RWyBsqSXzxBVZZdhFenm',
 	gitlab_login_string: 'docker login -u ivela -p RWyBsqSXzxBVZZdhFenm egitlab.iti.es:5050'
 };

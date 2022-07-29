@@ -4,18 +4,14 @@ from datetime import datetime as dt
 from datetime import timezone
 
 from pyngsi.agent import NgsiAgent
-from pyngsi.sources.source import Row, Source
-from pyngsi.sources.source_json import SourceJson
-
-from pyngsi.sink import SinkOrion, SinkStdout
+from pyngsi.sources.source import Row
+from pyngsi.sources.source_mqtt import SourceMqtt
+from pyngsi.sink import SinkStdout, SinkOrion
 from pyngsi.ngsi import DataModel
 
 from pyngsi.utils.iso8601 import datetime_to_iso8601
 
 import requests
-import time
-
-from pyngsi.scheduler import Scheduler, UNIT
 
 from constants import *
 
@@ -112,12 +108,14 @@ def ValidateJsonSchema_PublicRepository(json_data):
     message = "Given JSON data is valid"
     return True, message
 
-def DataModel_response(register):
+def build_entity(row: Row) -> DataModel:
 
     try:
 
-        #property register will contain all the fields returned by the API
-        # the developer must analyse the data in order to fulfill the Data Model
+        msg = row.record
+        #input record will be a JSON
+        payload = json.loads(msg)
+        #print(payload)
 
         #id of the Data Model must follow this pattern: 'urn:ngsi-ld:DataSource:' and the name of DataModel. Next line is an example
         m = DataModel(id='urn:ngsi-ld:DataSource:parameter_TypeDataModel', type='parameter_TypeDataModel')
@@ -127,53 +125,24 @@ def DataModel_response(register):
         parameter_dataModel
 
         #is_valid, msg = ValidateJsonSchema(m)
-
-    except Exception as ex:
-        print('ERROR: ',ex.args)
-        sendNotification('ERROR', ex.args, '')
-
-    return m
-
-def build_entity(row: Row) -> DataModel:
-
-    try:
-
-        sendNotification('SUCCESS', 'Agent execution begins.', '')
-
-        response = executeQuery()
-
-        model = DataModel_response(response)
-
-        sendNotification('SUCCESS', 'Agent execution ends.', model.json())
-
-    except Exception as ex:
-        print('ERROR: ',ex.args)
-        sendNotification('ERROR', ex.args, '')
-
-    return model
-
-def executeQuery():
-
-    try:
-
-        # Example of API URL. Next line it's only an example of how to do it
-        #response = requests.get("https://api.openweathermap.org/data/2.5/weather?id=255274&appid=" + APIKEY_OPEN_WEATHER + "&units=metric").json()
-        response = requests.get("parameter_urlAPI").json()
     
     except Exception as ex:
         print('ERROR: ',ex.args)
         sendNotification('ERROR', ex.args, '')
-
-    return response
+    
+    return m
 
 def sendNotification(notificationType, messageText, messageSended):
 
     try:
 
-        #print('Method that sends notification to MongoDB. Could be successful or an error.')
+        print('Method that sends notification to MongoDB. Could be successful or an error.')
 
         #RANDOM_ID is a unique identifier that allow notifications to be linked to the container they belong to
         random_ID = os.getenv("RANDOM_ID", RANDOM_ID)
+
+        time_interval = os.getenv("TIME_INTERVAL", TIME_INTERVAL)
+        unit = os.getenv("TIME_UNIT", TIME_UNIT)
 
         filter = {
             "random_id": random_ID,
@@ -181,36 +150,18 @@ def sendNotification(notificationType, messageText, messageSended):
             "time_unit": unit
         }
 
-        #------------------- STARTS OLD VERSION ---------------------------------
-        #Next line is for Linux deployment
-        #query_info = requests.get("http://172.17.0.1:3000/info/" + random_ID)
-               
-        #Next line is working locally
-        #query_info = requests.get("http://127.0.0.1:3000/info/" + random_ID)
-        
-        #Next line is for Windows deployment
-        #query_info = requests.get("http://host.docker.internal:3000/info/" + random_ID)
-        #print('answer', query_info.text)
-        
-        #------------------- ENDS OLD VERSION ---------------------------------
-
-        #---- new query that links random_id, cotainer and some parameters
-        # Linux Deployment
-        query_info = requests.post("http://172.17.0.1:3000/info/filtered", data = filter)
-        #Next line is working locally
+        # IP --> 127.0.0.1 out of the platform (debug time)
         #query_info = requests.post("http://127.0.0.1:3000/info/filtered", data = filter)
+
         #Next line is for Windows deployment
         #query_info = requests.post("http://host.docker.internal:3000/info/filtered", data = filter)
-        print('answer: ', query_info.text)
+
+        #Next line is for Linux deployment
+        query_info = requests.post("http://172.17.0.1:3000/info/filtered", data = filter)
         
+        print('answer', query_info.text)
         response_dict = json.loads(query_info.text)
-        #print('----------------------------')
-        #print(response_dict)
-        #print('----------------------------')
         message = response_dict['message'][0]
-        #print('----------------------------')
-        #print(message)
-        #print('----------------------------')
 
         container_name = message['container_name']
 
@@ -220,15 +171,11 @@ def sendNotification(notificationType, messageText, messageSended):
             "message": messageText,
             "register": messageSended
         }
-        
+        #Next line is for Windows deployment
+        #query = requests.post("http://host.docker.internal:3000/notification", data = data)
+
         #Next line is for Linux deployment
         query = requests.post("http://172.17.0.1:3000/notification", data = data)
-
-        #Next line is for Windows deployment
-        #query = requests.post("http://http://127.0.0.1:3000/notification", data = data)
-
-        #Local Deployment
-        #query = requests.post("http://host.docker.internal:3000/notification", data = data)
 
         #extracting response text
         response = query.text
@@ -250,21 +197,14 @@ def convertTo_ISO8601(dateObject):
     date_UTC = dt(year, month, day, hour, minute, second, tzinfo=timezone.utc)
 
     return datetime_to_iso8601(date_UTC)
-
+    
 def main():
 
     try:
 
-        print('Process the data')
+        print('Establish connection to the MQTT Server')
 
-        print('Call the method responsible for make the query to the API')
-
-        response = executeQuery()
-        #print(response)
-
-        print('Create the source')
-        # provider must be the name of the third-party API or a string to identify the API
-        src = SourceJson(response, provider='parameter_dataProvider')
+        src = SourceMqtt(host="parameter_mqttHost",port=int(parameter_mqttPort),topic="parameter_mqttTopic")
 
         # if you want to see the data in development time use the next line
         sink = SinkStdout()
@@ -272,22 +212,8 @@ def main():
         #sink = SinkOrion("parameter_urlORION", parameter_orionPORT)
 
         agent = NgsiAgent.create_agent(src, sink, process=build_entity)
-
-        print('Frequency is:', unit)
-
-        with switch(unit) as s:
-            if s.case('SECONDS', True):
-                scheduler = Scheduler(agent, interval=int(time_interval), unit=UNIT.seconds)
-            if s.case('MINUTES', True):
-                scheduler = Scheduler(agent, interval=int(time_interval), unit=UNIT.minutes)
-            if s.case('HOURS', True):
-                scheduler = Scheduler(agent, interval=int(time_interval), unit=UNIT.hours)
-            if s.case('DAYS', True):
-                scheduler = Scheduler(agent, interval=int(time_interval), unit=UNIT.days)
-            if s.default():
-                scheduler = Scheduler(agent, interval=int(time_interval), unit=UNIT.minutes)
-
-        scheduler.run()
+        agent.run()
+        agent.close()
 
     except Exception as ex:
         print('ERROR: ',ex.args)
@@ -296,31 +222,5 @@ def main():
         sendNotification('ERROR', ex.args, '')
 
 if __name__ == '__main__':
-    #---  LOAD THE ENVIRONMENTAL VARIABLES ---
-    
-    lon = len(sys.argv)#Length of input variables
-    
-    #print(lon)
-    #print(sys.argv[0])#we start counting from position 0
-
-    #----- SELECT TIME INTERVAL -------
-    if lon > 1:
-        print('lon > 1')
-        time_interval = sys.argv[1]
-    else:
-        print('lon <= 1')
-        time_interval = os.getenv("TIME_INTERVAL", TIME_INTERVAL)
-
-    #----- SELECT TIME UNIT -------
-    if lon > 2:
-        print('lon > 2')
-        unit = sys.argv[2]
-    else:
-        print('lon <= 2')
-        unit = os.getenv("TIME_UNIT", TIME_UNIT)
-
-    #-- copy the above code if you want to add more environmental variables.
-    #-- these variables must be written with upper case and also in the constants.py. (See TIME_INTERVAL and TIME_UNIT).
-    
     #---  EXECUTE THE MAIN FUNCTION ---
     main()

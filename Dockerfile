@@ -18,6 +18,7 @@ RUN npm run build
 
 #WORKDIR /api/dist
 EXPOSE 3000/tcp
+EXPOSE 3010/tcp
 ENV NODE_ENV production
 
 CMD ["npm", "run", "start"]

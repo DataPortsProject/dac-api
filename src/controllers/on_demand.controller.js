@@ -22,24 +22,26 @@ export default router;
 // o replicarlas en el servicio on_demand
 async function historicalValues(req, res) {
 	const query = requestContainerObj(req.body);
+	console.log(query);
 
 	try {
-		let name = '';
-		name = req.body.name;
+		const { name } = req.body;
+    const { image } = req.body;
 
 		// Hacemos el getTemplate para obtener el random_id
-		const template = await agentService.getTemplate(query.Image);
-
-		let random_id_env = '';
+		const template = await agentService.getTemplate(image);
+    console.log('-----------------------------')
+    console.log(template)
+		let random_id = '';
 		template.environment.forEach(env => {
 			if (env.key === 'RANDOM_ID') {
-				random_id_env = env.value;
+				random_id = env.value;
 			}
 		});
 
 		// Hacemos una insercion en mongo
 		const mongoObj = {
-			random_id: random_id_env,
+			random_id,
 			container_name: name
 		};
 
@@ -67,7 +69,6 @@ async function historicalValues(req, res) {
 			message: 'An error occurred'
 		});
 	}
-	return null;
 }
 
 async function createContainer(req, res) {

@@ -62,10 +62,10 @@ async function deleteImage(id) {
 }
 
 // Request para traerse las imagenes del gitlab de dataports
-async function getImagesFromExternalRepository() {
+async function getImagesFromExternalRepository(body) {
 	let data = [];
 	try {
-		await getRepositoryImages().then(response => {
+		await getRepositoryImages(body).then(response => {
 			data = response;
 		});
 	} catch (error) {
@@ -74,14 +74,14 @@ async function getImagesFromExternalRepository() {
 	return data;
 }
 
-async function downloadImageFromGitlab(path) {
+async function downloadImageFromGitlab(body) {
 	let data = [];
 	try {
-		await doLogin();
-		await downloadImage(path);
+		await doLogin(body);
+		await downloadImage(body.path);
 		data = {
 			msg: 'image pulled successfully!',
-			image: path
+			image: body.path
 		};
 	} catch (error) {
 		throw new CustomError(error.response.data, error.response.status);

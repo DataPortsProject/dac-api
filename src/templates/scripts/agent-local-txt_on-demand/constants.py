@@ -4,6 +4,10 @@
 #-- Environmental variables
 CALLBACK_URL = parameter_CallbackURL
 RANDOM_ID = parameter_random
+PRIVATE_REPOSITORY = parameter_isPrivateRepository
+URL_PUBLIC_REPOSITORY = parameter_urlPublicRepository
+PROJECT_NAME_PRIVATE_REPOSITORY = parameter_projectNamePrivateRepository
+LINK_PRIVATE_REPOSITORY = parameter_linkPrivateRepository
 
 class switch:
 

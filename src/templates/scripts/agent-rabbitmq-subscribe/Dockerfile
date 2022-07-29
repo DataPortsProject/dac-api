@@ -11,27 +11,11 @@ WORKDIR /agent
 
 ADD . /agent
 
-#next lines are for the different packages needed to run the scripts
-RUN pip install pandas
+RUN pip install pika
 
-RUN pip install numpy==1.19.3
-
-RUN pip install xlrd
-
-RUN pip install openpyxl
-
-RUN pip install python-dateutil==2.8.1
-
-RUN pip install pyngsi
-
-RUN pip install deprecated
-
-RUN pip install jsonschema
+RUN pip install requests
 
 #environmental variables. In the publish-subscribe at least time_interval and time_unit are mandatories
-
-ENV TIME_INTERVAL=parameter_timeInterval
-ENV TIME_UNIT=parameter_timeUnit
 ENV RANDOM_ID=parameter_random
 
 CMD ["python", "-u", "/agent/script.py"]

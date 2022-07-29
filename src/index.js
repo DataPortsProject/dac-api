@@ -16,6 +16,8 @@ import template from './controllers/pythonTemplate.controller';
 import dataModel from './controllers/dataModel.controller';
 import notification from './controllers/notification.controller';
 import info from './controllers/info.controller';
+import cygnus from './controllers/cygnus.controller';
+import infoToCygnus from './controllers/infoToCygnus.controller';
 
 import connectToDb from './config/mongodb';
 // import websockets from './config/wsServer';
@@ -25,7 +27,7 @@ connectToDb();
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-const checkContainers = require('./bg_process/process');
+// const checkContainers = require('./bg_process/process');
 
 const app = express();
 app.use(express.json());
@@ -43,12 +45,14 @@ app.use('/pythonTemplate', auth.authUser, auth.isAuthorized, template);
 app.use('/dataModel', auth.authUser, auth.isAuthorized, dataModel);
 app.use('/notification', auth.authUser, auth.isAuthorized, notification);
 app.use('/info', auth.authUser, auth.isAuthorized, info);
+app.use('/cygnus', auth.authUser, auth.isAuthorized, cygnus);
+app.use('/cygnusInformation', auth.authUser, auth.isAuthorized, infoToCygnus);
 
 // Swagger description
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
 
 // Proceso en background para el borrado de contenedores on_demand. Se ejecuta cada 10 minutos
-setInterval(checkContainers, 600 * 1000);
+// setInterval(checkContainers, 600 * 1000);
 
 const server = app.listen(config.PORT, () => logger.info(`Listen on ${config.PORT} port`));
 

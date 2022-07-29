@@ -3,24 +3,36 @@
 from datetime import datetime as dt
 from datetime import timezone
 
+import pandas as pd
+
+import xlrd
+import openpyxl
+
+from pyngsi.agent import NgsiAgent
 from pyngsi.sources.source import Row, Source
-from pyngsi.sink import SinkStdout, SinkOrion
+from pyngsi.sink import SinkOrion, SinkStdout
 from pyngsi.ngsi import DataModel
 
 from pyngsi.utils.iso8601 import datetime_to_iso8601
 
-from pyngsi.agent import NgsiAgent
+from pyngsi.sources.more_sources import SourceMicrosoftExcel
 
 from constants import *
 
-import requests
-
 import os
 import sys
+import shutil
+import threading
+import requests
+import csv
 import json
+
+import time
 
 import jsonschema
 from jsonschema import validate
+
+import base64
 
 def ValidateJsonSchema(json_data):
 
@@ -119,60 +131,52 @@ def ValidateJsonSchema_PublicRepository(json_data):
     message = "Given JSON data is valid"
     return schema_not_valid, message
 
-#Class defined to map the objects to be read from the txt file.
-#As many properties as necessary will be defined, indicating the type of each one of them.
-class TxtClass:
-  property_1: int = 0
-  property_2: int = 0
+#Class defined to map the objects to be read from the txt file
+#As many properties as necessary will be defined, indicating the type of each one of them
+class ExcelProperties:
+  property_1: str = ''
+  property_2: str = ''
 
-  def from_txt(line, delimiter=' '):
+  def from_excel(line, delimiter=';'):
 
     try:
 
-      cls = TxtClass()
+      cls = ExcelProperties()
 
       if line[0] == delimiter:
         print('First line incorrect')
       fields = line.rstrip().split(delimiter)
 
-      length = len(fields)
-      i = 0
-      strings = []
+      #property_1
+      prop_1 = fields[0]
+      cls.property_1 = removeCharacters(prop_1)
 
-      while i <= length - 1:
-        if fields[i] != '':
-          strings.append(fields[i])
-        i += 1
-      
-      #We assign the values we read from the txt to each of the properties of our class
-      #The following lines are just an example of how the properties of the class should be filled in.
-      cls.property_1 = float(strings[8])
-      cls.property_2 = float(strings[9])
-    
+      #property_2
+      prop_2 = str(fields[1])
+      cls.property_2 = prop_2
+
     except Exception as ex:
       print('ERROR: ',ex.args)
       sendNotification('ERROR', ex.args, '')
 
     return cls
 
-#------ This method is not used ------
-def build_entity(row: Row) -> DataModel:
+#function to build the data model (old implementation before to use Cygnus)
+def build_entity(row):
 
   try:
 
-    #print('Row',row)
-    #print('Record',row.record)
+    sendNotification('SUCCESS', 'Agent execution begins.', '')
 
-    #properties variable shall contain all mapped fields of the txt file
-    properties: TxtClass = TxtClass.from_txt(row.record)
+    container_name = ''
 
-    #id of the Data Model must follow this pattern: 'urn:ngsi-ld:DataSource:' and the name of DataModel.
+    ExcelPropertiesObject: ExcelProperties = ExcelProperties.from_excel(row.record)
+
+    #id of the Data Model must follow this pattern: 'urn:ngsi-ld:DataSource:' and the name of DataModel. Next line is an example
     m = DataModel(id='urn:ngsi-ld:DataSource:parameter_TypeDataModel', type='parameter_TypeDataModel')
     #Property dataProvider must be a string witht the provider of the data
     m.add("dataProvider", 'parameter_dataProvider')
-
     #Add as much property as were necessary following the following syntax
-    #m.add("property_1", properties.property_1) --> this is an example
     parameter_dataModel
 
     #is_valid, msg = ValidateJsonSchema(m)
@@ -180,9 +184,19 @@ def build_entity(row: Row) -> DataModel:
   except Exception as ex:
     print('ERROR: ',ex.args)
     sendNotification('ERROR', ex.args, '')
+  
+  container_name = sendNotification('SUCCESS', 'Agent execution ends.', m.json())
+
+  #Lines responsible for deleting on-demand containers
+  #Next line is for Windows deployment
+  #query_stop_on_demand = requests.patch("http://host.docker.internal:3000/notification/manageOnDemandContainers/" + container_name)
+
+  #Next line is for Linux deployment
+  query_stop_on_demand = requests.patch("http://172.17.0.1:3000/notification/manageOnDemandContainers/" + container_name)
 
   return m
 
+#new method for sending data to Cygnus
 def build_entity_cygnus(row):
 
   try:
@@ -194,7 +208,11 @@ def build_entity_cygnus(row):
     dateTimeObj = dt.now()
     currentTime = dateTimeObj.timestamp()
 
-    properties: TxtClass = TxtClass.from_txt(row.record)
+    ExcelPropertiesObject: ExcelProperties = ExcelProperties.from_excel(row.record)
+    #Example of recover properties from the excel file
+    #Vessel_property = ExcelPropertiesObject.vessel
+    #Status_property = ExcelPropertiesObject.status
+
 
     data = {
       "id": 'urn:ngsi-ld:DataSource:parameter_TypeDataModel',
@@ -203,7 +221,7 @@ def build_entity_cygnus(row):
       #"precipitation": {
       #    "type": "number",
       #    "metadata": {},
-      #    "value": properties.property_1
+      #    "value": ExcelPropertiesObject.property_1
       #}
     }
 
@@ -218,51 +236,67 @@ def build_entity_cygnus(row):
 
   return data
 
-def sendNotification(notificationType, messageText, messageSended):
+#Function to remove forbidden characters
+def removeCharacters(data):
 
   try:
-    
-    #print('Method that sends notification to MongoDB. Could be successful or an error.')
 
-    #RANDOM_ID is a unique identifier that allow notifications to be linked to the container they belong to
-    random_ID = os.getenv("RANDOM_ID", RANDOM_ID)
-    #print('random_ID', random_ID)
-    # IP --> 127.0.0.1 out of the platform (debug time)
-    #query_info = requests.get("http://127.0.0.1:3000/info/" + random_ID)
-
-    #Next line is for Windows deployment
-    #query_info = requests.get("http://host.docker.internal:3000/info/" + random_ID)
-
-    #Next line is for Linux deployment
-    query_info = requests.get("http://172.17.0.1:3000/info/" + random_ID)
-
-    #print('answer', query_info.text)
-    response_dict = json.loads(query_info.text)
-    message = response_dict['message']
-
-    container_name = message['container_name']
-
-    data = {
-      "id": container_name,
-      "type": notificationType,
-      "message": messageText,
-      "register": messageSended
-    }
-
-    #Next line is for Windows deployment
-    #query = requests.post("http://host.docker.internal:3000/notification", data = data)
-
-    #Next line is for Linux deployment
-    query = requests.post("http://172.17.0.1:3000/notification", data = data)
-
-    #extracting response text
-    response = query.text
-    print('response: ', response)
+    forbiddenCharacters = ['<', '>', '"', "'", '=', ';', '(', ')']
+    formattedData = ""
+    for char in forbiddenCharacters:
+      if isinstance(data, str):
+        formattedData = data.replace(char, "")
 
   except Exception as ex:
     print('ERROR: ',ex.args)
-  
-  return container_name
+    sendNotification('ERROR', ex.args, '')
+
+  return formattedData
+
+def sendNotification(notificationType, messageText, messageSended):
+
+    try:
+
+        #print('Method that sends notification to MongoDB. Could be successful or an error.')
+
+        #RANDOM_ID is a unique identifier that allow notifications to be linked to the container they belong to
+        random_ID = os.getenv("RANDOM_ID", RANDOM_ID)
+        #print('random_ID', random_ID)
+        # IP --> 127.0.0.1 out of the platform (debug time)
+        #query_info = requests.get("http://127.0.0.1:3000/info/" + random_ID)
+
+        #Next line is for Windows deployment
+        #query_info = requests.get("http://host.docker.internal:3000/info/" + random_ID)
+
+        #Next line is for Linux deployment
+        query_info = requests.get("http://172.17.0.1:3000/info/" + random_ID)
+        
+        #print('answer', query_info.text)
+        response_dict = json.loads(query_info.text)
+        message = response_dict['message']
+
+        container_name = message['container_name']
+
+        data = {
+            "id": container_name,
+            "type": notificationType,
+            "message": messageText,
+            "register": messageSended
+        }
+        #Next line is for Windows deployment
+        #query = requests.post("http://host.docker.internal:3000/notification", data = data)
+
+        #Next line is for Linux deployment
+        query = requests.post("http://172.17.0.1:3000/notification", data = data)
+
+        #extracting response text
+        response = query.text
+        print('response: ', response)
+
+    except Exception as ex:
+        print('ERROR: ',ex.args)
+
+    return container_name
 
 #Function to convert dateTime to string in format date-time ISO8601
 def convertTo_ISO8601(dateObject):
@@ -277,21 +311,38 @@ def convertTo_ISO8601(dateObject):
     date_UTC = dt(year, month, day, hour, minute, second, tzinfo=timezone.utc)
 
     return datetime_to_iso8601(date_UTC)
-
+    
+#Function to recover the data from the Excel file
 def main():
 
   try:
 
     container_name = ''
-
     container_name = sendNotification('SUCCESS', 'Agent execution begins.', '')
 
-    print("Let's read the local file")
-    src = Source.from_file("parameter_filePath")
+    print('Convert the excel file from csv to xlsx')
+    path= 'parameter_filePath'
+
+    arrPath = path.split('/')
+
+    fileName = arrPath[1]
+    arrfileName = fileName.split('.')
+
+    fileNameModified = arrfileName[0] + '_processed.xlsx'
+
+    # Convert csv to xlsx
+    #Skiprows is the number of rows that are ommitted at the beggining of the document. Change this value!!
+    df = pd.read_excel(path, skiprows=3)
+    df.to_excel(fileNameModified, index=False)
+
+    #Change the name of the sheet
+    Source.register_extension('xlsx', SourceMicrosoftExcel, sheetname='Sheet1', ignore=3)
+
+    src = SourceMicrosoftExcel('./' + fileNameModified)
+    src = src.skip_header()
 
     arrayJson = []
 
-    #HEADERS used for sending data to the API (API --> Cygnus)
     head = {"Content-Type": "application/json", "Accept": "application/json"}
 
     count = 0
@@ -299,7 +350,8 @@ def main():
     iterator = 0
 
     for row in src:
-      #dataModel = build_entity(row) --> NOT USED
+      #print(row)
+      #dataModel = build_entity(row)
       dataModel = build_entity_cygnus(row)
       aux_dataModel = dataModel
       #append dataModel object to the arrayJson variable
@@ -307,14 +359,18 @@ def main():
       iterator +=1
       count +=1
       res = count % 100
+
       if res == 0:
         #requests.post(callback_url, json=arrayJson, headers=head)
         print('-----------------------------------------------------------')
         print('data', arrayJson)
         print('-----------------------------------------------------------')
+        #Next line is for Windows deployment
+        #query_result = requests.post('http://host.docker.internal:3000/cygnus', json= arrayJson, headers=head)
+
         query_result = requests.post('http://172.17.0.1:3000/cygnus', json= arrayJson, headers=head)
         print('---- Envio ----', query_result.text)
-        container_name = sendNotification('SUCCESS', 'Block of 100 messages sent.', json.dumps(arrayJson))
+        container_name = sendNotification('SUCCESS', 'Block of ' + str(len(arrayJson)) + ' messages sent.', json.dumps(arrayJson))
         count = 0
         arrayJson = []
 
@@ -324,7 +380,8 @@ def main():
       print(res)
       print('-----------------------------------------------------------')
       #Para enviar el último bloque
-      #requests.post(callback_url, json=arrayJson, headers=head)
+      #Next line is for Windows deployment
+      #query_result = requests.post('http://host.docker.internal:3000/cygnus', json= arrayJson, headers=head)
       query_result = requests.post('http://172.17.0.1:3000/cygnus', json= arrayJson, headers=head)
       print('---- Envio ----', query_result.text)
       container_name = sendNotification('SUCCESS', 'Block of ' + str(len(arrayJson)) + ' messages sent.', json.dumps(arrayJson))
@@ -342,28 +399,33 @@ def main():
       "cygnus_database": "db_default",
       "total": iterator
     }
+
+    #INFO about cygnus for ICCS API
+    #Next line is for Windows deployment
+    #query_infoToCygnus = requests.post('http://host.docker.internal:3000/cygnusInformation', data = data_Cygnus)
+
     query_infoToCygnus = requests.post("http://172.17.0.1:3000/cygnusInformation", data = data_Cygnus)
     print('---- Envio Info To Cygnus ----', query_infoToCygnus.text)
 
-    container_name = sendNotification('SUCCESS', 'Agent execution ends.', arrayJson)
+    os.remove('./' + fileNameModified)
+
+    container_name = sendNotification('SUCCESS', 'Agent execution ends.', '')
+    print(container_name)
 
     #DELETE THE REGISTER THAT ASSOCIATES RANDOM_ID WITH THE NAME OF THE CONTAINER
     #RANDOM_ID is a unique identifier that allow notifications to be linked to the container they belong to
     random_ID = os.getenv("RANDOM_ID", RANDOM_ID)
     #Next line is for Windows deployment
     #query_deleteInfo = requests.delete("http://host.docker.internal:3000/info/" + random_ID)
-
     #Next line is for Linux deployment
     query_deleteInfo = requests.delete("http://172.17.0.1:3000/info/" + random_ID)
     print('---- Remove association container to random_id ----', query_deleteInfo.text)
-    
-    #Lines responsible for deleting on-demand containers
-    #Next line is for Windows deployment
-    #query_stop_on_demand = requests.patch("http://host.docker.internal:3000/notification/manageOnDemandContainers/" + container_name)
 
-    #Next line is for Linux deployment
+    #Lines responsible for deleting on-demand containers
     print('--------------------------------------------------------------------------------------------------------------')
     print("------------------------------------ LET'S MANAGE THE ON-DEMAND CONTAINER ------------------------------------")
+    #Next line is for Windows deployment
+    #query_stop_on_demand = requests.patch("http://host.docker.internal:3000/notification/manageOnDemandContainers/" + random_ID)
     query_stop_on_demand = requests.patch("http://172.17.0.1:3000/notification/manageOnDemandContainers/" + container_name)
     print('---- Contenedor parado ----', query_stop_on_demand.text)
 

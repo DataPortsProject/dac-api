@@ -14,13 +14,10 @@ Before to execute the python script the following points:
 			"LONGITUDE": "float"
 		}
 	
-	- Go to page (for all the agents): https://tools.knowledgewalls.com/jsontostring. Select the content of file DataSource.json and paste the JSON in the page. Convert the JSON to String. Copy the output and paste the content on the label datasource_configuration in Dockerfile. 
-	Changing the string parameter_dataModelSerialized for the content of the JSON serialized to String.
-
 	- For the script.py file, check the sendNotification function. The two API endpoint calls (info and notification), must be made depending on whether the deployment is a Windows or 
 	Linux machine. By default, the uncommented lines are for Linux machines.
 
 The command you must execute (in the directory of the zip file once unpacked) to have the image available on the platform (after having made the above changes):
 	* Get-Content Dockerfile | docker build . -t [imageName]:[version]
-	[imageName]: must have the following pattern --> 'dataportsh2020/' + name of the agent (without spaces, lower case and without special characters)
-	This is an example of imageName: dataportsh2020/agent-api_publish-subscribe:1.0
+	[imageName]: Represents the name to be given to the docker image (without spaces, lower case and without special characters)
+	This is an example of imageName: agent-api_publish-subscribe:1.0

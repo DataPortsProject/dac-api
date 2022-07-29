@@ -14,6 +14,8 @@ router.get('/checkDatasource', checkDatasource);
 router.get('/getAgentsAsociated', getAgentsAsociated);
 router.post('/createEntity', createEntity);
 router.delete('/:id', deleteEntity);
+router.post('/createSubscriptions', createSubscriptions);
+router.delete('/subscription/:id', deleteSubscription);
 
 export default router;
 
@@ -76,11 +78,70 @@ async function createEntity(req, res) {
 	return null;
 }
 
+async function createSubscriptions(req, res) {
+	const entity = req.body;
+
+	try {
+		const data = await orionService.createSubscriptions(entity);
+
+		res.status(200).json({
+			status: 'OK',
+			message: data
+		});
+	} catch (error) {
+		logger.error(error);
+		if (error instanceof CustomError) {
+			// eslint-disable-next-line
+			const { message, name, stack, type } = error;
+			return res.status(type).json({
+				status: name,
+				message: message.message
+			});
+		}
+		return res.status(404).json({
+			error: {
+				status: 'Error',
+				message: 'An error occurred'
+			}
+		});
+	}
+	return null;
+}
+
 async function deleteEntity(req, res) {
 	const { params: { id } = { id: null } } = req;
 
 	try {
 		const data = await orionService.deleteEntity(id);
+		res.status(200).json({
+			status: 'OK',
+			message: data
+		});
+	} catch (error) {
+		logger.error(error);
+		if (error instanceof CustomError) {
+			// eslint-disable-next-line
+			const { message, name, stack, type } = error;
+			return res.status(type).json({
+				status: name,
+				message: message.message
+			});
+		}
+		return res.status(404).json({
+			error: {
+				status: 'Error',
+				message: 'An error occurred'
+			}
+		});
+	}
+	return null;
+}
+
+async function deleteSubscription(req, res) {
+	const { params: { id } = { id: null } } = req;
+
+	try {
+		const data = await orionService.deleteSubscription(id);
 		res.status(200).json({
 			status: 'OK',
 			message: data

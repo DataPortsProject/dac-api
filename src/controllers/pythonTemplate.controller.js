@@ -24,7 +24,7 @@ router.get('/:id', getPythonTemplate);
 router.post(
 	'/',
 	[
-		check('source').isIn(['agent-api', 'agent-local-txt', 'agent-local-excel']),
+		check('source').isIn(['agent-api', 'agent-local-txt', 'agent-local-excel', 'agent-mqtt-listener', 'agent-api-listener', 'agent-rabbitMQ-listener']),
 		check('type').isIn(['publish-subscribe', 'on-demand'])
 	],
 	util.sendValidations,
@@ -34,7 +34,7 @@ router.delete('/:id', deletePythonTemplate);
 router.put(
 	'/:id',
 	[
-		check('source').isIn(['agent-api', 'agent-local-txt', 'agent-local-excel']),
+		check('source').isIn(['agent-api', 'agent-local-txt', 'agent-local-excel', 'agent-mqtt-listener', 'agent-api-listener', 'agent-rabbitMQ-listener']),
 		check('type').isIn(['publish-subscribe', 'on-demand'])
 	],
 	util.sendValidations,
@@ -182,8 +182,8 @@ function getZIPTemplate(req, res) {
 
 	try {
 		query = req.body;
-		// console.log('json schema');
-		// console.log(query.jsonSchemaSerialized);
+		// console.log('DATA SOURCE');
+		// console.log(query.dataSourceSerialized);
 
 		folderName = Date.now();
 
@@ -197,7 +197,7 @@ function getZIPTemplate(req, res) {
 			readFromFile(query.constants, 'CONSTANTS', query, folderDirectory),
 			readFromFile(query.script, 'SCRIPT', query, folderDirectory),
 			readFromFile(query.dockerFile, 'DOCKERFILE', query, folderDirectory),
-			generateDataSource(`./src/zips/${folderName}/DataSource.json`, query),
+			// generateDataSource(`./src/zips/${folderName}/DataSource.json`, query),
 			new Promise((resolve, reject) => {
 				setTimeout(() => {
 					console.log('Agrego ficheros al ZIP');
@@ -209,7 +209,11 @@ function getZIPTemplate(req, res) {
 
 					zip.addLocalFile('./src/templates/Readme.txt');
 
-					zip.addLocalFile(`./src/zips/${folderName}/DataSource.json`);
+					if (query.constants.includes('agent-mqtt-subscribe')) {
+						zip.addLocalFile('./src/templates/requirements.txt');
+					}
+
+					// zip.addLocalFile(`./src/zips/${folderName}/DataSource.json`);
 
 					const downloadName = `${Date.now()}.zip`;
 
@@ -245,7 +249,7 @@ function getZIPTemplate(req, res) {
 			const constantsFile = result[0];
 			const scriptFile = result[1];
 			const dockerFile = result[2];
-			const datasource = result[3];
+			// const datasource = result[3];
 			// do more stuff
 		});
 	} catch (error) {
@@ -312,10 +316,35 @@ function readFromFile(file, fileType, query, folderDirectory) {
 							/parameter_random/gim,
 							`"${random_string}"`
 						);
+						
+						var isPublic = false
+						if (query.isPrivateRepository_dataModel) {
+							isPublic = 'True'
+						} else {
+							isPublic = 'False'
+						}
+
+						var isPrivateRepository_parameter = randomID_parameter.replace(
+							/parameter_isPrivateRepository/gim, isPublic);
+
+						var urlPublicRepository_parameter = isPrivateRepository_parameter.replace(
+							/parameter_urlPublicRepository/gim,
+							`"${query.urlPublicDataModel}"`
+						);
+
+						var projectName_privateRepository_parameter = urlPublicRepository_parameter.replace(
+							/parameter_projectNamePrivateRepository/gim,
+							`"${query.dataForPrivateRepository.projectName}"`
+						);
+
+						var link_privateRepository_parameter = projectName_privateRepository_parameter.replace(
+							/parameter_linkPrivateRepository/gim,
+							`"${query.dataForPrivateRepository.link}"`
+						);
 
 						directory = `${folderDirectory}/constants.py`;
 
-						fs.writeFile(directory, randomID_parameter, 'utf-8', function(err, data) {
+						fs.writeFile(directory, link_privateRepository_parameter, 'utf-8', function(err, data) {
 							if (err) throw err;
 							console.log('Done! Constants');
 						});
@@ -371,11 +400,59 @@ function readFromFile(file, fileType, query, folderDirectory) {
 							query.filename
 						);
 
+						// MQTT Server
+						var mqttServerParameter = fileNameParameter.replace(
+							/parameter_mqttHost/gim,
+							query.mqtt_host
+						);
+
+						// MQTT Port
+						var mqttPortParameter = mqttServerParameter.replace(
+							/parameter_mqttPort/gim,
+							query.mqtt_port
+						);
+
+						// MQTT Topic
+						var mqttTopicParameter = mqttPortParameter.replace(
+							/parameter_mqttTopic/gim,
+							query.mqtt_topic
+						);
+            
+            			// Queue RabbitMQ
+						var rabbitmqQueueParameter = mqttTopicParameter.replace(
+							/parameter_rabbit_queue/gim,
+							query.rabbitmq_queue
+						);
+
+						//USER RabbitMQ
+						var rabbitmqUserParameter = rabbitmqQueueParameter.replace(
+							/parameter_rabbit_user/gim,
+							query.rabbitmq_user
+						);
+
+						//Password RabbitMQ
+						var rabbitmqPasswordParameter = rabbitmqUserParameter.replace(
+							/parameter_rabbit_password/gim,
+							query.rabbitmq_password
+						);
+
+						//Server RabbitMQ
+						var rabbitmqServerParameter = rabbitmqPasswordParameter.replace(
+							/parameter_rabbit_server/gim,
+							query.rabbitmq_host
+						);
+
+						//Port RabbitMQ
+						var rabbitmqPortParameter = rabbitmqServerParameter.replace(
+							/parameter_rabbit_port/gim,
+							query.rabbitmq_port
+						);
+
 						console.log(`FILEPATH: ${query.filepath}`);
 
 						directory = `${folderDirectory}/script.py`;
 
-						fs.writeFile(directory, fileNameParameter, 'utf-8', function(err, data) {
+						fs.writeFile(directory, rabbitmqPortParameter, 'utf-8', function(err, data) {
 							if (err) throw err;
 							console.log('Done Script!');
 						});
@@ -399,10 +476,15 @@ function readFromFile(file, fileType, query, folderDirectory) {
 							/parameter_random/gim,
 							`"${random_string}"`
 						);
+                                  
+            			var dataModel_serialized = random_parameter.replace(
+							/parameter_dataModelSerialized/gim,
+							JSON.stringify(query.dataSourceSerialized)
+						);
 
 						directory = `${folderDirectory}/Dockerfile`;
 
-						fs.writeFile(directory, random_parameter, 'utf-8', function(err, data) {
+						fs.writeFile(directory, dataModel_serialized, 'utf-8', function(err, data) {
 							if (err) throw err;
 							console.log('Done Dockerfile!');
 						});
@@ -431,7 +513,7 @@ function deleteFolderRecursive(path) {
 
 function generateDataSource(directory, query) {
 	return new Promise((resolve, reject) => {
-		fs.writeFile(directory, JSON.stringify(query.jsonSchemaSerialized, null, 4), err => {
+		fs.writeFile(directory, JSON.stringify(query.dataSourceSerialized, null, 4), err => {
 			if (err) {
 				console.log(err);
 				return;

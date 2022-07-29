@@ -4,7 +4,7 @@ import request from '../utils/request_gitlab';
 // ---- PROJECTS ----
 export function getProjects() {
 	return request({
-		url: '/api/v4/projects',
+		url: '/api/v4/projects?order_by=id&sort=asc',
 		method: variables.METHOD_GET,
 		headers: {
 			'PRIVATE-TOKEN': variables.gitlab_token
@@ -22,12 +22,13 @@ export function getJson(newURL) {
 	});
 }
 
-export function getRepositoryImages() {
+export function getRepositoryImages(body) {
 	return request({
-		url: '/api/v4/projects/25/registry/repositories',
+		baseURL: body.url,
+		url: `/api/v4/projects/${body.projectId}/registry/repositories`,
 		method: variables.METHOD_GET,
 		headers: {
-			'PRIVATE-TOKEN': variables.gitlab_images_token
+			'PRIVATE-TOKEN': body.accessToken
 		}
 	});
 }

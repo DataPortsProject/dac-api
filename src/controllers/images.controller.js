@@ -11,7 +11,7 @@ router.get('/', getAll);
 router.get('/:id/template', getTemplate);
 router.get('/:id/config_datasource', getDataSource);
 router.delete('/:id', deleteImage);
-router.get('/getImagesFromExternalRepository', getImagesFromExternalRepository);
+router.post('/getImagesFromExternalRepository', getImagesFromExternalRepository);
 router.post('/downloadImage', downloadImageFromGitlab);
 
 export default router;
@@ -41,12 +41,11 @@ async function getAll(req, res) {
 	return null;
 }
 
-// Id weather_env: sha256:e4fda8d01a0ccb4db9c785b4cbd3b0219ab2f9a5efc23592e6a5be6275030d5f
-
 async function getDataSource(req, res) {
 	const { params: { id } = { id: null } } = req;
 
 	try {
+
 		if (id.length !== 71) {
 			return res.status(500).json({
 				status: 'Validation',
@@ -143,8 +142,9 @@ async function deleteImage(req, res) {
 
 // TODO: Request para traerse imagenes de un repositorio externo
 async function getImagesFromExternalRepository(req, res) {
+	const { body } = req;
 	try {
-		const data = await imagesService.getImagesFromExternalRepository();
+		const data = await imagesService.getImagesFromExternalRepository(body);
 		res.status(200).json({
 			status: 'OK',
 			message: data
@@ -170,10 +170,10 @@ async function getImagesFromExternalRepository(req, res) {
 }
 
 async function downloadImageFromGitlab(req, res) {
-	const { path } = req.body;
-
+	const { body } = req;
+	console.log(body);
 	try {
-		const data = await imagesService.downloadImageFromGitlab(path);
+		const data = await imagesService.downloadImageFromGitlab(body);
 		res.status(200).json({
 			status: 'OK',
 			message: data

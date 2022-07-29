@@ -7,6 +7,12 @@ const mySchema = new Schema(
 		},
 		container_name: {
 			type: 'String'
+		},
+		time_interval: {
+			type: 'Number'
+		},
+		time_unit: {
+			type: 'String'
 		}
 	},
 	{

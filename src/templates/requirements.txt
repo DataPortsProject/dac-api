@@ -1,0 +1,1 @@
+git+https://github.com/Orange-OpenSource/pyngsi.git@mqtt

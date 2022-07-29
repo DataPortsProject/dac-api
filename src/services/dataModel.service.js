@@ -73,7 +73,7 @@ async function getJsonSchema(properties) {
 		console.log('SERVICIO');
 		console.log(path);
 		await getProjects().then(response => {
-			// console.log(response);
+			//console.log(response);
 			projects = response;
 			let ID = null;
 			projects.forEach(element => {
@@ -81,9 +81,10 @@ async function getJsonSchema(properties) {
 					ID = element.id;
 				}
 			});
-			// console.log(ID);
+			console.log(ID);
 			const path_updated = path.replace('/', '%2F');
-			const url = `/api/v4/projects/${ID}/repository/files/${path_updated}/raw`;
+			const path_updated_v2 = path_updated.replace('/', '%2F');
+			const url = `/api/v4/projects/${ID}/repository/files/${path_updated_v2}/raw`;
 			data = getJson(url);
 		});
 	} catch (error) {
