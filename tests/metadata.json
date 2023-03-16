@@ -1,0 +1,16 @@
+{
+  "id": "urn:ngsi-ld:AgentContainer:6594428fa456c8af8937fc794ade92c6f1483870840b8b887c88433a0e6399c4",
+  "type": "AgentContainer",
+  "name": {
+    "type": "Text",
+    "value": "vpf_pcs_subscribe:1.0"
+  },
+  "agentType": {
+    "type": "Text",
+    "value": "publish-subscribe"
+  },
+  "refDataSource": {
+    "type": "RelationShip",
+    "value": "urn:ngsi-ld:DataSource:PortCall"
+  }
+}

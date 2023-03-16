@@ -15,23 +15,24 @@ if (process.env.NODE_ENV === 'production') {
     handleExceptions: true,
     maxsize: 536870912, // 512MB
     maxFiles: 5,
-    colorize: false
+    colorize: false,
   });
   winston.add(files);
-} else {
-  const alignedWithColorsAndTime = winston.format.combine(
-    winston.format.colorize(),
-    winston.format.timestamp(),
-    winston.format.printf(info => `${info.timestamp} [${info.level}]: ${info.message}`)
-  );
-
-  const console = new winston.transports.Console({
-    level: 'debug',
-    handleExceptions: true,
-    format: alignedWithColorsAndTime,
-    colorize: true
-  });
-  winston.add(console);
 }
+const alignedWithColorsAndTime = winston.format.combine(
+  winston.format.colorize(),
+  winston.format.timestamp(),
+  winston.format.printf(
+    (info) => `${info.timestamp} [${info.level}]: ${info.message}`
+  )
+);
+
+const console = new winston.transports.Console({
+  level: 'debug',
+  handleExceptions: true,
+  format: alignedWithColorsAndTime,
+  colorize: true,
+});
+winston.add(console);
 
 export default winston;

@@ -1,8 +1,18 @@
-﻿import { getImages, inspectImageByID, deleteImageByID } from '../api/docker_API';
+﻿import {
+  getImages,
+  inspectImageById,
+  deleteImageByID,
+} from '../api/docker_API';
 import { getRepositoryImages } from '../api/gitlab_API';
 import { doLogin, downloadImage } from '../api/cmd';
 import CustomError from '../utils/CustomError';
-import { createImagesObj, createTemplateObj, createDataSourceObject } from '../utils/Mapping';
+import {
+  createImagesObj,
+  createTemplateObj,
+  createDataSourceObject,
+} from '../utils/Mapping';
+
+import logger from '../config/winston';
 
 const service = {};
 
@@ -17,74 +27,71 @@ export default service;
 
 // Implementation
 async function getAll() {
-	let data = [];
-	try {
-		await getImages().then(response => {
-			const imageData = response;
-			data = createImagesObj(imageData);
-		});
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+  logger.info('Retrieving all docker images');
+  try {
+    return createImagesObj(await getImages());
+  } catch (error) {
+    logger.error(`Failed retrieving docker images:  ${error.toString()}`);
+    if (error.isAxiosError) {
+      if (error.response !== undefined) {
+        throw new CustomError(error.response.data, error.response.status);
+      } else {
+        throw new CustomError(
+          { message: { reason: error.code, context: error.message } },
+          500,
+          'Internal Server Error'
+        );
+      }
+    }
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
-async function getDataSource(ID) {
-	let data = [];
-	try {
-		const imageInfo = await inspectImageByID(ID);
-		data = createDataSourceObject(imageInfo);
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+async function getDataSource(id) {
+  try {
+    const imageInfo = await inspectImageById(id);
+    return createDataSourceObject(imageInfo);
+  } catch (error) {
+    logger.error(`Failed retrieving datasource with id ${id}:`);
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
-async function getTemplate(ID) {
-	let data = [];
-	try {
-		const imageInfo = await inspectImageByID(ID);
-		data = createTemplateObj(imageInfo);
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+async function getTemplate(id) {
+  try {
+    const imageInfo = await inspectImageById(id);
+    return createTemplateObj(imageInfo);
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
 async function deleteImage(id) {
-	let data = [];
-	try {
-		data = await deleteImageByID(id);
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+  try {
+    return await deleteImageByID(id);
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
 // Request para traerse las imagenes del gitlab de dataports
 async function getImagesFromExternalRepository(body) {
-	let data = [];
-	try {
-		await getRepositoryImages(body).then(response => {
-			data = response;
-		});
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+  try {
+    return await getRepositoryImages(body);
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
 async function downloadImageFromGitlab(body) {
-	let data = [];
-	try {
-		await doLogin(body);
-		await downloadImage(body.path);
-		data = {
-			msg: 'image pulled successfully!',
-			image: body.path
-		};
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+  try {
+    await doLogin(body);
+    await downloadImage(body.path);
+    return {
+      msg: 'image pulled successfully!',
+      image: body.path,
+    };
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }

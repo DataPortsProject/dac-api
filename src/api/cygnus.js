@@ -1,38 +1,46 @@
 import variables from '../utils/variables';
-import request from '../utils/request_cygnus';
+import client from '../utils/request_cygnus';
 import requestNodeRED from '../utils/request_nodeRED';
 
-export function insert(entity) {
+import logger from '../config/winston';
 
-	console.log('longitud', entity.data.length);
-	let servicepath = '';
-	for (var i = 0; i < entity.data.length; i++) {
-		servicepath += '/,';
-	}
-	console.log('------------------');
-  console.log('servicepath', servicepath);
+export async function insert(entities) {
+  logger.debug(`About to insert ${entities.data.length} entities in cygnus`);
+  // needed by cygnus to know how many entities are present in the body
+  const servicepath = entities.data.map(() => '/').join(',');
+  logger.debug(`Just before sending http request for ${entities.subscriptionId}`);
 
-	return request({
-		url: '/notify',
-		method: variables.METHOD_POST,
-		data: entity,
-		headers: {
-			'Content-Type': 'application/json; charset=utf-8',
-			'Ngsiv2-Attrsformat': 'normalized',
-			'fiware-servicepath': servicepath
-		}
-	});
+  return client({
+    url: '/notify',
+    method: variables.METHOD_POST,
+    data: entities,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Ngsiv2-Attrsformat': 'normalized',
+      'fiware-servicepath': servicepath,
+    },
+  })
+    .then((response) => {
+      logger.debug(`Response for ${entities.subscriptionId}`);
+      return response;
+    })
+    .catch((err) => {
+      logger.debug(`Error for ${entities.subscriptionId}`);
+      return Promise.reject(err);
+    });
 }
 
 export function sendInfo(entity) {
-	return requestNodeRED({
+  logger.debug(
+    `About to notify DAC data availability:\n${JSON.stringify(entity, null, 2)}`
+  );
+  return requestNodeRED({
     url: '/datanotify',
-		// url: '/notify', // for node-RED (testing purpose)
-		method: variables.METHOD_POST,
-		data: entity,
-		headers: {
-			'Content-Type': variables.Application_Json,
-			Accept: variables.Application_Json
-		}
-	});
+    method: variables.METHOD_POST,
+    data: entity,
+    headers: {
+      'Content-Type': variables.APPLICATION_JSON,
+      Accept: variables.APPLICATION_JSON,
+    },
+  });
 }

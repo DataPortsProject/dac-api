@@ -1,7 +1,6 @@
 {
   "verbose": false,
-  "ignore": ["src/zips/*"],
-  "env": {
-    "NODE_ENV": "development"
-  }
+  "ignore": [
+    "src/zips/*"
+  ]
 }

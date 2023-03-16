@@ -1,0 +1,4922 @@
+[
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-07",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 960000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 165840,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-03",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 3786000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 611040,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-30",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 4320000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 746280,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "1",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 32,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 6066000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 859800,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "1",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-10",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7101000,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "FR",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "FR",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 1120000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 78400,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 78400,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-23",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 4020000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 556500,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7049090,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "DE",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "DE",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 431900,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 41460,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 38870,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-30",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 707000590,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 2100000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 578880,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 32,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7099310,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "NL",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "NL",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 804000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 76380,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 71560,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7049090,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "SE",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "SE",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 1056000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 101380,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 95040,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-30",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 707000590,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 7439000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 2002752,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 32,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-05",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7070005,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "DE",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "DE",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 17778000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 1200200,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 1687500,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7049090,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "IE",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "IE",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 4867600,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 467290,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 438080,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7099310,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "FR",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "FR",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 1697900,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 161300,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 151110,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7049090,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "DE",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "DE",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 534600,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 51320,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 48110,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7093000,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "DE",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "DE",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 40680000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 6576909,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 6576909,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-09",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 709601000,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 3483000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 574080,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7051100,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "FI",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "FI",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 699000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 60110,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 55920,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-07",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 709601000,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 1755000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 231000,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-05",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7096010,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "DK",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "DK",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 2112000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 300000,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 378000,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-13",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 709601000,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 5808000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 852500,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-28",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 707000599,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 725000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 172440,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7020000,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "FR",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "FR",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 306000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 39600,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 39600,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2023-01-12",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 7099310,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "I",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "FR",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "FR",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 1137600,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 108070,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 101250,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-02",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 480000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 82920,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-03",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 4200000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 571900,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-02",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 709931000,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 2760000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 188280,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-14",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 6866000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 1108560,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "1",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-13",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 1680000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 179200,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "0",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  },
+  {
+    "id": "urn:ngsi-ld:ITI:Customs:2022:12",
+    "type": "Customs",
+    "customsRegime": {
+      "metadata": {},
+      "value": "E",
+      "type": "string"
+    },
+    "year": {
+      "metadata": {},
+      "value": 2022,
+      "type": "number"
+    },
+    "month": {
+      "metadata": {},
+      "value": 12,
+      "type": "number"
+    },
+    "customsProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "customsDocumentAdmissionDate": {
+      "metadata": {},
+      "value": "2022-12-20",
+      "type": "string"
+    },
+    "TARIC": {
+      "metadata": {},
+      "value": 702000099,
+      "type": "number"
+    },
+    "customsDocumentType": {
+      "metadata": {},
+      "value": "D",
+      "type": "string"
+    },
+    "additionalCodes": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "customDocumentDestinationCountry": {
+      "metadata": {},
+      "value": "GB",
+      "type": "string"
+    },
+    "customDocumentOriginCountry": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "originExpeditionCountry": {
+      "metadata": {},
+      "value": "ES",
+      "type": "string"
+    },
+    "customsRegimeRequested": {
+      "metadata": {},
+      "value": 10,
+      "type": "number"
+    },
+    "customDocumentOriginProvince": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customDocumentDestinationProvince": {
+      "metadata": {},
+      "value": 4,
+      "type": "number"
+    },
+    "precedingRegimeRequested": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "customsDocumentGrossWeight": {
+      "metadata": {},
+      "value": 1440000,
+      "type": "number"
+    },
+    "unitNumber": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "statisticalValue": {
+      "metadata": {},
+      "value": 248760,
+      "type": "number"
+    },
+    "invoiceValue": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "countryCurrency": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "container": {
+      "metadata": {},
+      "value": "1",
+      "type": "number"
+    },
+    "transportRegime": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transportModeOnBorder": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "countryTransportMode": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    },
+    "transportNationality": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "exchangeZone": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "transactionNature": {
+      "metadata": {},
+      "value": 11,
+      "type": "number"
+    },
+    "deliveryCondition": {
+      "metadata": {},
+      "value": "",
+      "type": "string"
+    },
+    "contingent": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "tariffPreference": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "vesselFreight": {
+      "metadata": {},
+      "value": 0,
+      "type": "number"
+    },
+    "fiscalAddressProvince": {
+      "metadata": {},
+      "value": 3,
+      "type": "number"
+    }
+  }
+]

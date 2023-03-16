@@ -5,20 +5,22 @@ LABEL ngsiagent.project="dataports"
 LABEL ngsiagent.type="on_demand"
 #next label is the DataSource file serialized to string
 LABEL ngsiagent.datasource_configuration='parameter_dataModelSerialized'
+# The api version is used to differentiate variations on the external API used to retrieve data
+LABEL ngsiagent.api_version='1.0'
+# This label defines the kind of data source used by this agent
+LABEL ngsiagent.api_type='api-requester'
+# Use this label to briefly describe what this agent does
+LABEL ngisagent.api_description='This agent ...'
+# Use this label to credit the agent's developer
 LABEL MAINTAINER jclemente@prodevelop.es
 
 WORKDIR /agent
-
-ADD . /agent
+COPY requirements.txt .
 
 #next lines are for the different packages needed to run the scripts
-RUN pip install pyngsi
+RUN pip install --no-cache-dir --upgrade -r requirements.txt && pip install pyngsi  deprecated  python-dateutil>=2.8.0 jsonschema
 
-RUN pip install deprecated
-
-RUN pip install python-dateutil>=2.8.0
-
-RUN pip install jsonschema
+ADD . /agent
 
 #environmental variables.
 

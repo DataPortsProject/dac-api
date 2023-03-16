@@ -1,11 +1,32 @@
 import express from 'express';
 import { check } from 'express-validator';
+/* import {
+  createReadStream,
+  exists,
+  existsSync,
+  lstatSync,
+  mkdir,
+  readdirSync,
+  readFile,
+  rmdirSync,
+  unlinkSync,
+  writeFile,
+} from 'fs'; */
+
+import {
+  createReadStream,
+  existsSync,
+  mkdir,
+  readFile,
+  rmSync,
+  writeFile,
+} from 'fs';
+
 import logger from '../config/winston';
-import pythonTemplateService from '../services/pythonTemplate.service';
+import * as pythonTemplateService from '../services/pythonTemplate.service';
 
-import util from '../middlewares/util';
+import { sendValidations } from '../middlewares/util';
 
-import variables from '../utils/variables';
 import CustomError from '../utils/CustomError';
 
 import { randomString } from '../utils/random';
@@ -13,512 +34,409 @@ import { randomString } from '../utils/random';
 import { constructPythonTemplate, updateTemplate } from '../utils/Mapping';
 
 const AdmZip = require('adm-zip');
-const ZIP = require('express-zip');
-const fs = require('fs');
 
-const router = express.Router();
+// eslint-disable-next-line import/prefer-default-export
+export const router = express.Router();
 
 // routes
 router.get('/', getAll);
 router.get('/:id', getPythonTemplate);
 router.post(
-	'/',
-	[
-		check('source').isIn(['agent-api', 'agent-local-txt', 'agent-local-excel', 'agent-mqtt-listener', 'agent-api-listener', 'agent-rabbitMQ-listener']),
-		check('type').isIn(['publish-subscribe', 'on-demand'])
-	],
-	util.sendValidations,
-	createPythonTemplate
+  '/',
+  [
+    check('source').isIn([
+      'agent-api',
+      'agent-local-txt',
+      'agent-local-excel',
+      'agent-mqtt-listener',
+      'agent-api-listener',
+      'agent-rabbitMQ-listener',
+    ]),
+    check('type').isIn(['publish-subscribe', 'on-demand']),
+  ],
+  sendValidations,
+  createPythonTemplate
 );
 router.delete('/:id', deletePythonTemplate);
 router.put(
-	'/:id',
-	[
-		check('source').isIn(['agent-api', 'agent-local-txt', 'agent-local-excel', 'agent-mqtt-listener', 'agent-api-listener', 'agent-rabbitMQ-listener']),
-		check('type').isIn(['publish-subscribe', 'on-demand'])
-	],
-	util.sendValidations,
-	updatePythonTemplate
+  '/:id',
+  [
+    check('source').isIn([
+      'agent-api',
+      'agent-local-txt',
+      'agent-local-excel',
+      'agent-mqtt-listener',
+      'agent-api-listener',
+      'agent-rabbitMQ-listener',
+    ]),
+    check('type').isIn(['publish-subscribe', 'on-demand']),
+  ],
+  sendValidations,
+  updatePythonTemplate
 );
 router.post('/getZIPTemplate', getZIPTemplate);
 
-export default router;
-
 // Implementación
 async function getPythonTemplate(req, res) {
-	const { params: { id } = { id: null } } = req;
+  const { params: { id } = { id: null } } = req;
 
-	try {
-		const data = await pythonTemplateService.getPythonTemplate(id);
-		res.status(200).json({
-			status: 'OK',
-			message: data
-		});
-	} catch (error) {
-		logger.error(error);
-		if (error instanceof CustomError) {
-			const { message, name, stack, type } = error;
-			return res.status(type).json({
-				status: name,
-				message: message.message
-			});
-		}
-		return res.status(404).json({
-			status: 'Error',
-			message: 'An error ocurred'
-		});
-	}
-	return null;
+  try {
+    const data = await pythonTemplateService.getPythonTemplate(id);
+    res.status(200).json({
+      status: 'OK',
+      message: data,
+    });
+  } catch (error) {
+    logger.error(error.toString());
+    if (error instanceof CustomError) {
+      const { message, name, type } = error;
+      return res.status(type).json({
+        status: name,
+        message: message.message,
+      });
+    }
+    return res.status(404).json({
+      status: 'Error',
+      message: 'An error ocurred',
+    });
+  }
+  return null;
 }
 
 async function getAll(req, res) {
-	const { query } = req;
-	try {
-		const data = await pythonTemplateService.getAll();
-		res.status(200).json({
-			status: 'OK',
-			message: data
-		});
-	} catch (error) {
-		logger.error(error);
-		if (error instanceof CustomError) {
-			const { message, name, stack, type } = error;
-			return res.status(type).json({
-				status: name,
-				message: message.message
-			});
-		}
-		return res.status(404).json({
-			status: 'Error',
-			message: 'An error ocurred'
-		});
-	}
-	return null;
+  try {
+    const data = await pythonTemplateService.getAll();
+    return res.status(200).json({
+      status: 'OK',
+      message: data,
+    });
+  } catch (error) {
+    logger.error(error.toString());
+    if (error instanceof CustomError) {
+      const { message, name, type } = error;
+      return res.status(type).json({
+        status: name,
+        message: message.message,
+      });
+    }
+    return res.status(404).json({
+      status: 'Error',
+      message: 'An error ocurred',
+    });
+  }
 }
 
 async function deletePythonTemplate(req, res) {
-	const { params: { id } = { id: null } } = req;
+  const { params: { id } = { id: null } } = req;
 
-	try {
-		const data = await pythonTemplateService.deletePythonTemplate(id);
-		res.status(200).json({
-			status: 'OK',
-			message: data
-		});
-	} catch (error) {
-		logger.error(error);
-		if (error instanceof CustomError) {
-			const { message, name, stack, type } = error;
-			return res.status(type).json({
-				status: name,
-				message: message.message
-			});
-		}
-		return res.status(404).json({
-			status: 'Error',
-			message: 'An error ocurred'
-		});
-	}
-	return null;
+  try {
+    const data = await pythonTemplateService.deletePythonTemplate(id);
+    res.status(200).json({
+      status: 'OK',
+      message: data,
+    });
+  } catch (error) {
+    logger.error(error.toString());
+    if (error instanceof CustomError) {
+      const { message, name, type } = error;
+      return res.status(type).json({
+        status: name,
+        message: message.message,
+      });
+    }
+    return res.status(404).json({
+      status: 'Error',
+      message: 'An error ocurred',
+    });
+  }
+  return null;
 }
 
 async function createPythonTemplate(req, res) {
-	const template = constructPythonTemplate(req.body);
+  const template = constructPythonTemplate(req.body);
 
-	try {
-		const data = await pythonTemplateService.createPythonTemplate(template);
-		res.status(200).json({
-			status: 'OK',
-			message: data
-		});
-	} catch (error) {
-		logger.error(error);
-		if (error instanceof CustomError) {
-			const { message, name, stack, type } = error;
-			return res.status(type).json({
-				status: name,
-				message: message.message
-			});
-		}
-		return res.status(404).json({
-			status: 'Error',
-			message: 'An error occurred'
-		});
-	}
-	return null;
+  try {
+    const data = await pythonTemplateService.createPythonTemplate(template);
+    res.status(200).json({
+      status: 'OK',
+      message: data,
+    });
+  } catch (error) {
+    logger.error(error.toString());
+    if (error instanceof CustomError) {
+      const { message, name, type } = error;
+      return res.status(type).json({
+        status: name,
+        message: message.message,
+      });
+    }
+    return res.status(404).json({
+      status: 'Error',
+      message: 'An error occurred',
+    });
+  }
+  return null;
 }
 
 async function updatePythonTemplate(req, res) {
-	const { params: { id } = { id: null } } = req;
-	const template = updateTemplate(req.body);
+  const { params: { id } = { id: null } } = req;
+  const template = updateTemplate(req.body);
 
-	try {
-		const data = await pythonTemplateService.updatePythonTemplate(id, template);
-		res.status(200).json({
-			status: 'OK',
-			message: data
-		});
-	} catch (error) {
-		logger.error(error);
-		if (error instanceof CustomError) {
-			const { message, name, stack, type } = error;
-			return res.status(type).json({
-				status: name,
-				message: message.message
-			});
-		}
-		return res.status(404).json({
-			status: 'Error',
-			message: 'An error occurred'
-		});
-	}
-	return null;
+  try {
+    const data = pythonTemplateService.updatePythonTemplate(id, template);
+    res.status(200).json({
+      status: 'OK',
+      message: data,
+    });
+  } catch (error) {
+    logger.error(error.toString());
+    if (error instanceof CustomError) {
+      const { message, name, type } = error;
+      return res.status(type).json({
+        status: name,
+        message: message.message,
+      });
+    }
+    return res.status(404).json({
+      status: 'Error',
+      message: 'An error occurred',
+    });
+  }
+  return null;
 }
 
-function getZIPTemplate(req, res) {
-	let folderName = '';
-	let query = null;
-	const directory = '';
+async function getZIPTemplate(req, res) {
+  let folderName = '';
+  let query = null;
 
-	try {
-		query = req.body;
-		// console.log('DATA SOURCE');
-		// console.log(query.dataSourceSerialized);
+  try {
+    query = req.body;
 
-		folderName = Date.now();
+    folderName = Date.now();
 
-		const folderDirectory = `./src/zips/${folderName}`;
-		// -- Create folder --
-		fs.mkdir(folderDirectory, { recursive: true }, err => {
-			if (err) throw err;
-		});
+    const folderDirectory = `./src/zips/${folderName}`;
+    // -- Create folder --
+    mkdir(folderDirectory, { recursive: true }, (err) => {
+      if (err) throw err;
+    });
 
-		const promises = [
-			readFromFile(query.constants, 'CONSTANTS', query, folderDirectory),
-			readFromFile(query.script, 'SCRIPT', query, folderDirectory),
-			readFromFile(query.dockerFile, 'DOCKERFILE', query, folderDirectory),
-			// generateDataSource(`./src/zips/${folderName}/DataSource.json`, query),
-			new Promise((resolve, reject) => {
-				setTimeout(() => {
-					console.log('Agrego ficheros al ZIP');
+    await readFromFile(query.constants, 'CONSTANTS', query, folderDirectory);
+    await readFromFile(query.script, 'SCRIPT', query, folderDirectory);
+    await readFromFile(query.dockerFile, 'DOCKERFILE', query, folderDirectory);
 
-					const zip = new AdmZip();
-					zip.addLocalFile(`./src/zips/${folderName}/constants.py`);
-					zip.addLocalFile(`./src/zips/${folderName}/script.py`);
-					zip.addLocalFile(`./src/zips/${folderName}/Dockerfile`);
+    logger.debug('Agrego ficheros al ZIP');
 
-					zip.addLocalFile('./src/templates/Readme.txt');
+    const zip = new AdmZip();
+    zip.addLocalFile(`./src/zips/${folderName}/constants.py`);
+    zip.addLocalFile(`./src/zips/${folderName}/script.py`);
+    zip.addLocalFile(`./src/zips/${folderName}/Dockerfile`);
 
-					if (query.constants.includes('agent-mqtt-subscribe')) {
-						zip.addLocalFile('./src/templates/requirements.txt');
-					}
+    zip.addLocalFile('./src/templates/Readme.txt');
 
-					// zip.addLocalFile(`./src/zips/${folderName}/DataSource.json`);
+    if (query.constants.includes('agent-mqtt-subscribe')) {
+      zip.addLocalFile('./src/templates/requirements.txt');
+    }
 
-					const downloadName = `${Date.now()}.zip`;
+    const downloadName = `${Date.now()}.zip`;
 
-					zip.writeZip(`./src/zips/${folderName}/${downloadName}`);
+    zip.writeZip(`./src/zips/${folderName}/${downloadName}`);
 
-					const filePath = `./src/zips/${folderName}/${downloadName}`;
+    const filePath = `./src/zips/${folderName}/${downloadName}`;
 
-					fs.exists(filePath, function(exists) {
-						if (exists) {
-							res.writeHead(200, {
-								'Content-Type': 'application/zip',
-								'Content-Disposition': `attachment; filename=${downloadName}`
-							});
-							fs.createReadStream(filePath).pipe(res);
-							// Delete the zip folder and their content
-							setTimeout(() => {
-								deleteFolderRecursive(`./src/zips/${folderName}`);
-								console.log('Borramos el directorio');
-							}, 4 * 1000);
-						} else {
-							res.writeHead(400, {
-								'Content-Type': 'text/plain'
-							});
-							res.end('Error file does not exist');
-						}
-					});
-				}, 4000);
-			}) //
-		];
-
-		Promise.all(promises).then(result => {
-			console.log(result);
-			const constantsFile = result[0];
-			const scriptFile = result[1];
-			const dockerFile = result[2];
-			// const datasource = result[3];
-			// do more stuff
-		});
-	} catch (error) {
-		console.log(error);
-		logger.error(error);
-		if (error instanceof CustomError) {
-			const { message, name, stack, type } = error;
-			return res.status(type).json({
-				status: 'Error',
-				message: 'An error occurred'
-			});
-		}
-	}
-	return null;
+    if (existsSync(filePath)) {
+      res.writeHead(200, {
+        'Content-Type': 'application/zip',
+        'Content-Disposition': `attachment; filename=${downloadName}`,
+      });
+      createReadStream(filePath).pipe(res);
+      // Delete the zip folder and their content
+      setTimeout(() => {
+        deleteFolderRecursive(`./src/zips/${folderName}`);
+        logger.debug(`Borramos el directorio ${folderName}`);
+      }, 4 * 1000);
+    } else {
+      res.writeHead(400, {
+        'Content-Type': 'text/plain',
+      });
+      res.end('Error file does not exist');
+    }
+  } catch (error) {
+    logger.error(error.toString());
+    if (error instanceof CustomError) {
+      const { type } = error;
+      return res.status(type).json({
+        status: 'Error',
+        message: 'An error occurred',
+      });
+    }
+  }
+  return null;
 }
 
 // Function to complete getZIPTemplate!!
 function readFromFile(file, fileType, query, folderDirectory) {
-	let directory = '';
-	let random_string = '';
-	// random_string = randomString(16, 'aA');
+  let directory = '';
+  let randomStr = '';
+  if (new Date().getMinutes() % 2) {
+    randomStr = randomString(32, '#aA');
+  } else {
+    randomStr = randomString(64, '#A!');
+  }
 
-	const d = new Date();
-	const n = d.getMinutes();
-	// console.log(`MINUTES: ${n}`);
-	// console.log(n % 2);
-	// RANDOM STRING WILL DEPEND ON THE MODULE OPERATOR
-	if (n % 2) {
-		// console.log(32);
-		random_string = randomString(32, '#aA');
-	} else {
-		// console.log(64);
-		random_string = randomString(64, '#A!');
-	}
-	// console.log(random_string);
+  logger.debug(`Reading file ${file} with type ${fileType}`);
 
-	console.log('READ FILE');
-	console.log(file);
-	console.log(fileType);
-	return new Promise((resolve, reject) => {
-		fs.readFile(file, 'utf8', function(err, data) {
-			if (err) {
-				console.log(err);
-				reject(err);
-			} else {
-				// resolve(data);
-				switch (fileType) {
-					case 'CONSTANTS':
-						var fileUpdated = data.replace(
-							/parameter_timeInterval/gim,
-							query.time_interval
-						);
-						var timeUnit_newValue = fileUpdated.replace(
-							/parameter_timeUnit/gim,
-							`"${query.time_unit}"`
-						);
+  return new Promise((resolve, reject) => {
+    readFile(file, 'utf8', (err, data) => {
+      if (err) {
+        logger.error(err.toString());
+        reject(err);
+      } else {
+        let dataModelProperties = '';
+        let processedData = data;
+        if (fileType === 'CONSTANTS') {
+          const fileUpdated = data.replace(
+            /parameter_timeInterval/gim,
+            query.time_interval
+          );
+          const timeUnitNewValue = fileUpdated.replace(
+            /parameter_timeUnit/gim,
+            `"${query.time_unit}"`
+          );
 
-						var callback_parameter = timeUnit_newValue.replace(
-							/parameter_CallbackURL/gim,
-							`"${query.callback_url}"`
-						);
+          const callbackParameter = timeUnitNewValue.replace(
+            /parameter_CallbackURL/gim,
+            `"${query.callback_url}"`
+          );
 
-						var randomID_parameter = callback_parameter.replace(
-							/parameter_random/gim,
-							`"${random_string}"`
-						);
-						
-						var isPublic = false
-						if (query.isPrivateRepository_dataModel) {
-							isPublic = 'True'
-						} else {
-							isPublic = 'False'
-						}
+          const randomIDParameter = callbackParameter.replace(
+            /parameter_random/gim,
+            `"${randomStr}"`
+          );
 
-						var isPrivateRepository_parameter = randomID_parameter.replace(
-							/parameter_isPrivateRepository/gim, isPublic);
+          const isPublic = query.isPrivateRepository_dataModel
+            ? 'True'
+            : 'False';
 
-						var urlPublicRepository_parameter = isPrivateRepository_parameter.replace(
-							/parameter_urlPublicRepository/gim,
-							`"${query.urlPublicDataModel}"`
-						);
+          const isPrivateRepositoryParameter = randomIDParameter.replace(
+            /parameter_isPrivateRepository/gim,
+            isPublic
+          );
 
-						var projectName_privateRepository_parameter = urlPublicRepository_parameter.replace(
-							/parameter_projectNamePrivateRepository/gim,
-							`"${query.dataForPrivateRepository.projectName}"`
-						);
+          const urlPublicRepositoryParameter =
+            isPrivateRepositoryParameter.replace(
+              /parameter_urlPublicRepository/gim,
+              `"${query.urlPublicDataModel}"`
+            );
 
-						var link_privateRepository_parameter = projectName_privateRepository_parameter.replace(
-							/parameter_linkPrivateRepository/gim,
-							`"${query.dataForPrivateRepository.link}"`
-						);
+          const projectNamePrivateRepositoryParameter =
+            urlPublicRepositoryParameter.replace(
+              /parameter_projectNamePrivateRepository/gim,
+              `"${query.dataForPrivateRepository.projectName}"`
+            );
 
-						directory = `${folderDirectory}/constants.py`;
+          const linkPrivateRepositoryParameter =
+            projectNamePrivateRepositoryParameter.replace(
+              /parameter_linkPrivateRepository/gim,
+              `"${query.dataForPrivateRepository.link}"`
+            );
 
-						fs.writeFile(directory, link_privateRepository_parameter, 'utf-8', function(err, data) {
-							if (err) throw err;
-							console.log('Done! Constants');
-						});
+          directory = `${folderDirectory}/constants.py`;
 
-						break;
-					case 'SCRIPT':
-						var urlParameter = data.replace(/parameter_urlAPI/gim, query.url_api);
-						var orionUrlParameter = urlParameter.replace(
-							/parameter_urlORION/gim,
-							query.orion_url
-						);
-						var orionPortParameter = orionUrlParameter.replace(
-							/parameter_orionPORT/gim,
-							query.orion_port
-						);
-						var dataProviderParameter = orionPortParameter.replace(
-							/parameter_dataProvider/gim,
-							query.data_provider
-						);
-						// create data model properties
-						var dataModel_properties = '';
-						query.fieldsUsed_DataModel.forEach(prop => {
-							if (dataModel_properties == '') {
-								dataModel_properties = `${'m.add(' + '"'}${prop.id}"` + `,"")`;
-							} else {
-								dataModel_properties =
-									`${dataModel_properties}\n` +
-									`m.add(` +
-									`"${prop.id}"` +
-									`,"")`;
-							}
-						});
-						var dataModelParameter = dataProviderParameter.replace(
-							/parameter_dataModel/gim,
-							dataModel_properties
-						);
+          writeFile(
+            directory,
+            linkPrivateRepositoryParameter,
+            'utf-8',
+            (_err) => {
+              if (_err) {
+                reject(_err);
+              } else {
+                logger.info('Done! Constants');
+                resolve();
+              }
+            }
+          );
+        }
+        if (fileType === 'SCRIPT') {
+          // create data model properties
+          dataModelProperties = query.fieldsUsed_DataModel
+            .map((prop) => `m.add("${prop.id}", ##add value here##)`)
+            .join('\n');
 
-						// Data Model Type
-						var dataModelTypeParameter = dataModelParameter.replace(
-							/parameter_TypeDataModel/gim,
-							query.dataModelType
-						);
+          processedData = data
+            .replace(/parameter_urlAPI/gim, query.url_api)
+            .replace(/parameter_urlORION/gim, query.orion_url)
+            .replace(/parameter_orionPORT/gim, query.orion_port)
+            .replace(/parameter_dataProvider/gim, query.data_provider)
+            .replace(/parameter_dataModel/gim, dataModelProperties)
+            .replace(/parameter_TypeDataModel/gim, query.dataModelType)
+            .replace(/parameter_filePath/gim, query.filepath)
+            .replace(/parameter_fileName/gim, query.filename)
+            .replace(/parameter_mqttHost/gim, query.mqtt_host)
+            .replace(/parameter_mqttPort/gim, query.mqtt_port)
+            .replace(/parameter_mqttTopic/gim, query.mqtt_topic)
+            .replace(/parameter_rabbit_queue/gim, query.rabbitmq_queue)
+            .replace(/parameter_rabbit_user/gim, query.rabbitmq_user)
+            .replace(/parameter_rabbit_password/gim, query.rabbitmq_password)
+            .replace(/parameter_rabbit_server/gim, query.rabbitmq_host)
+            .replace(/parameter_rabbit_port/gim, query.rabbitmq_port);
 
-						// File Path parameter
-						var filePathParameter = dataModelTypeParameter.replace(
-							/parameter_filePath/gim,
-							query.filepath
-						);
+          directory = `${folderDirectory}/script.py`;
 
-						// File Name parameter
-						var fileNameParameter = filePathParameter.replace(
-							/parameter_fileName/gim,
-							query.filename
-						);
+          /* Object.keys(query).forEach((key) => {
+            const value = query[key];
+            processedData = processedData.replace(
+              new RegExp(`\\\${pythonTemplate\\.data\\.${key}}`, 'gim'),
+              value
+            );
+          });
 
-						// MQTT Server
-						var mqttServerParameter = fileNameParameter.replace(
-							/parameter_mqttHost/gim,
-							query.mqtt_host
-						);
+          processedData = processedData.replace(
+            /\${pythonTemplate\.data\.dataModelProperties}/gim,
+            dataModelProperties
+          ); */
 
-						// MQTT Port
-						var mqttPortParameter = mqttServerParameter.replace(
-							/parameter_mqttPort/gim,
-							query.mqtt_port
-						);
+          writeFile(directory, processedData, 'utf-8', (_err) => {
+            if (_err) {
+              reject(_err);
+            } else {
+              logger.info('Done Script!');
+              resolve();
+            }
+          });
 
-						// MQTT Topic
-						var mqttTopicParameter = mqttPortParameter.replace(
-							/parameter_mqttTopic/gim,
-							query.mqtt_topic
-						);
-            
-            			// Queue RabbitMQ
-						var rabbitmqQueueParameter = mqttTopicParameter.replace(
-							/parameter_rabbit_queue/gim,
-							query.rabbitmq_queue
-						);
+          /* writeFile(directory, rabbitmqPortParameter, 'utf-8', (_err) => {
+            if (_err) throw _err;
+            logger.info('Done Script!');
+          }); */
+        }
+        if (fileType === 'DOCKERFILE') {
+          const dockerFile = data
+            .replace(/parameter_timeInterval/gim, query.time_interval)
+            .replace(/parameter_timeUnit/gim, `"${query.time_unit}"`)
+            .replace(/parameter_CallbackURL/gim, `"${query.callback_url}"`)
+            .replace(/parameter_random/gim, `"${randomStr}"`)
+            .replace(/parameter_dataModelSerialized/gim,
+              JSON.stringify(query.dataSourceSerialized)
+            );
 
-						//USER RabbitMQ
-						var rabbitmqUserParameter = rabbitmqQueueParameter.replace(
-							/parameter_rabbit_user/gim,
-							query.rabbitmq_user
-						);
+          directory = `${folderDirectory}/Dockerfile`;
 
-						//Password RabbitMQ
-						var rabbitmqPasswordParameter = rabbitmqUserParameter.replace(
-							/parameter_rabbit_password/gim,
-							query.rabbitmq_password
-						);
-
-						//Server RabbitMQ
-						var rabbitmqServerParameter = rabbitmqPasswordParameter.replace(
-							/parameter_rabbit_server/gim,
-							query.rabbitmq_host
-						);
-
-						//Port RabbitMQ
-						var rabbitmqPortParameter = rabbitmqServerParameter.replace(
-							/parameter_rabbit_port/gim,
-							query.rabbitmq_port
-						);
-
-						console.log(`FILEPATH: ${query.filepath}`);
-
-						directory = `${folderDirectory}/script.py`;
-
-						fs.writeFile(directory, rabbitmqPortParameter, 'utf-8', function(err, data) {
-							if (err) throw err;
-							console.log('Done Script!');
-						});
-						break;
-					case 'DOCKERFILE':
-						var fileUpdated = data.replace(
-							/parameter_timeInterval/gim,
-							query.time_interval
-						);
-						var timeUnit_newValue = fileUpdated.replace(
-							/parameter_timeUnit/gim,
-							`"${query.time_unit}"`
-						);
-
-						var callback_parameter = timeUnit_newValue.replace(
-							/parameter_CallbackURL/gim,
-							`"${query.callback_url}"`
-						);
-
-						var random_parameter = callback_parameter.replace(
-							/parameter_random/gim,
-							`"${random_string}"`
-						);
-                                  
-            			var dataModel_serialized = random_parameter.replace(
-							/parameter_dataModelSerialized/gim,
-							JSON.stringify(query.dataSourceSerialized)
-						);
-
-						directory = `${folderDirectory}/Dockerfile`;
-
-						fs.writeFile(directory, dataModel_serialized, 'utf-8', function(err, data) {
-							if (err) throw err;
-							console.log('Done Dockerfile!');
-						});
-						break;
-					default:
-						console.log('Nothing to do');
-				}
-			}
-		});
-	});
+          writeFile(directory, dockerFile, 'utf-8', (_err) => {
+            if (_err) {
+              reject(_err);
+            } else {
+              logger.info('Done Dockerfile!');
+              resolve();
+            }
+          });
+        }
+      }
+    });
+  });
 }
 
 function deleteFolderRecursive(path) {
-	if (fs.existsSync(path)) {
-		fs.readdirSync(path).forEach(function(file, index) {
-			const curPath = `${path}/${file}`;
-			if (fs.lstatSync(curPath).isDirectory()) {
-				deleteFolderRecursive(curPath);
-			} else {
-				fs.unlinkSync(curPath);
-			}
-		});
-		fs.rmdirSync(path);
-	}
-}
-
-function generateDataSource(directory, query) {
-	return new Promise((resolve, reject) => {
-		fs.writeFile(directory, JSON.stringify(query.dataSourceSerialized, null, 4), err => {
-			if (err) {
-				console.log(err);
-				return;
-			}
-			console.log('Done DataSource!');
-		});
-	});
+  if (existsSync(path)) {
+    rmSync(path, { recursive: true, force: true });
+  }
 }

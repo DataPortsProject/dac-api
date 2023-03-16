@@ -1,34 +1,42 @@
 import axios from 'axios';
+import { Agent } from 'https';
+import logger from '../config/winston';
 import variables from './variables';
+
+const httpsAgent = Agent({
+  rejectUnauthorized: false,
+});
 
 // create an axios instance
 const service = axios.create({
-	baseURL: variables.baseURL_nodeRED,
-	timeout: 15000 // request timeout
+  baseURL: variables.URL_DAC_NOTIFY,
+  timeout: 15000, // request timeout
+  httpsAgent,
 });
 
 // request interceptor
 service.interceptors.request.use(
-	config => {
-		// do something before request is sent
-		return config;
-	},
-	error => {
-		// do something with request error
-		return Promise.reject(error);
-	}
+  (config) => config,
+  (error) => {
+    logger.error(error);
+    return Promise.reject(error);
+  }
 );
 
 // response interceptor
 service.interceptors.response.use(
-	response => {
-		// const res = JSON.stringify(response.data, null, 4)
-		const res = response.data;
-		return res;
-	},
-	error => {
-		return Promise.reject(error);
-	}
+  (response) => {
+    const res = response.data;
+    return res;
+  },
+  (error) => {
+    if (error.isAxiosError) {
+      logger.error(JSON.stringify(error.response));
+    } else {
+      logger.error(error);
+    }
+    return Promise.reject(error);
+  }
 );
 
 export default service;

@@ -1,14 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+import os
 #-- Environmental variables
-TIME_INTERVAL = parameter_timeInterval
-TIME_UNIT = parameter_timeUnit
-RANDOM_ID = parameter_random
+TIME_INTERVAL = os.getenv('TIME_INTERVAL')
+TIME_UNIT = os.getenv('TIME_UNIT')
+RANDOM_ID = os.getenv('RANDOM_ID')
 PRIVATE_REPOSITORY = parameter_isPrivateRepository
 URL_PUBLIC_REPOSITORY = parameter_urlPublicRepository
 PROJECT_NAME_PRIVATE_REPOSITORY = parameter_projectNamePrivateRepository
 LINK_PRIVATE_REPOSITORY = parameter_linkPrivateRepository
+
+
+# Use this if run the API as a local service (non-docker)
+# BASE_URL = '127.0.0.1'
+# Use this if run the API as a local service with docker in a Windows Computer
+# BASE_URL = 'host.docker.internal'
+# Use this if run the API as a local service with docker in a Linux Computer
+BASE_URL = '172.17.0.1'
+
+
+API_URL = f'http://{BASE_URL}:3000'
+HOST = '0.0.0.0'
 
 class switch:
 
@@ -29,8 +41,7 @@ class switch:
     pass
 
   def case(self, expr, break_=False):
-    if self.strict:
-      if self.matched:
+    if self.strict and self.matched:
         return False
     if self.matching or self.comparator(self.variable, expr):
       if not break_:

@@ -2,93 +2,70 @@ import DataModelObject from '../models/DataModelObject.model';
 
 import { getProjects, getJson } from '../api/gitlab_API';
 
-const service = {};
-
-service.getAll = getAll;
-service.createDataModel_Assigment = createDataModel_Assigment;
-service.deleteDataModel = deleteDataModel;
-service.updateDataModel = updateDataModel;
-service.getJsonSchema = getJsonSchema;
-
-export default service;
+import logger from '../config/winston';
 
 // Implementation
-async function getAll() {
-	let data = [];
-	try {
-		data = await DataModelObject.find();
-	} catch (error) {
-		throw new Error(error);
-	}
-	return data;
+export async function getAll() {
+  return DataModelObject.find()
+    .exec()
+    .catch((error) => {
+      logger.error(error.toString());
+      throw new Error(error);
+    });
 }
 
-async function createDataModel_Assigment(query) {
-	let data = null;
-
-	try {
-		data = await new DataModelObject(query).save();
-	} catch (error) {
-		throw new Error(error);
-	}
-
-	return data;
+export async function createDataModelAssigment(query) {
+  return new DataModelObject(query).save().catch((error) => {
+    throw new Error(error);
+  });
 }
 
-async function deleteDataModel(id) {
-	let data = [];
-	try {
-		data = await DataModelObject.deleteOne({ _id: id });
-	} catch (error) {
-		throw new Error(error);
-	}
-	return data;
+export function deleteDataModel(id) {
+  return DataModelObject.deleteOne({ _id: id })
+    .exec()
+    .catch((error) => {
+      throw new Error(error);
+    });
 }
 
-async function updateDataModel(id, query) {
-	let data = null;
+export async function updateDataModel(id, query) {
+  let data = null;
 
-	console.log('SERVICE');
-	console.log('id', id);
-
-	try {
-		data = await DataModelObject.findOneAndUpdate({ _id: id }, { $set: query }, { new: true });
-		if (!data) {
-			throw new Error('Not exist');
-		}
-	} catch (error) {
-		console.log('ERROR');
-		console.log(error);
-		throw new Error(error);
-	}
-	return data;
+  try {
+    data = await DataModelObject.findOneAndUpdate(
+      { _id: id },
+      { $set: query },
+      { new: true }
+    ).exec();
+    if (!data) {
+      throw new Error('Not exist');
+    }
+  } catch (error) {
+    logger.error(error.toString());
+    throw new Error(error);
+  }
 }
 
-async function getJsonSchema(properties) {
-	let projects = null;
-	let data = null;
+export async function getJsonSchema(properties) {
+  let projects = null;
 
-	try {
-		const path = properties.link;
-		console.log('SERVICIO');
-		console.log(path);
-		await getProjects().then(response => {
-			//console.log(response);
-			projects = response;
-			let ID = null;
-			projects.forEach(element => {
-				if (element.name === properties.projectName) {
-					ID = element.id;
-				}
-			});
-			console.log(ID);
-			const path_updated = path.replace('/', '%2F');
-			const path_updated_v2 = path_updated.replace('/', '%2F');
-			const url = `/api/v4/projects/${ID}/repository/files/${path_updated_v2}/raw`;
-			data = getJson(url);
-		});
-	} catch (error) {
-		throw new Error(error);
-	}
-	return data;
+  try {
+    const path = properties.link;
+    return await getProjects().then((response) => {
+      projects = response;
+      let ID = null;
+      projects.forEach((element) => {
+        if (element.name === properties.projectName) {
+          ID = element.id;
+        }
+      });
+      const pathUpdated = path.replace('/', '%2F');
+      const pathUpdatedV2 = pathUpdated.replace('/', '%2F');
+      const url = `/api/v4/projects/${ID}/repository/files/${pathUpdatedV2}/raw`;
+      return getJson(url);
+    });
+  } catch (error) {
+    logger.error(error.toString());
+    throw new Error(error);
+  }
 }

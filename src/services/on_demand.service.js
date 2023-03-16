@@ -1,38 +1,27 @@
-﻿import OnDemand from '../models/OnDemand.model';
-import { createContainerFromImage, startContainerCreated } from '../api/docker_API'
+﻿import {
+  createContainerFromImage,
+  startContainerCreated,
+} from '../api/docker_API';
+import CustomError from '../utils/CustomError';
 import { responseContainerObject } from '../utils/Mapping';
 
-const service = {};
-
-service.createContainer = createContainer;
-
-export default service;
-
 // Implementation
-async function createContainer(name, query) {
-  let container_data = null;
-  let data = null;
+// eslint-disable-next-line import/prefer-default-export
+export async function createContainer(name, query) {
   try {
-    await createContainerFromImage(name, query).then(response => {
-      container_data = startContainer(response.Id)
-      data = responseContainerObject(container_data)
-    },
-    error => {
-      data = error.response.data.message;
-    });
+    await createContainerFromImage(name, query)
+      .then(
+        (response) => startContainer(response.Id),
+        (error) => error.response.data.message
+      )
+      .then((containerData) => responseContainerObject(containerData));
   } catch (error) {
     throw new CustomError(error.response.data, error.response.status);
   }
-  return data;
 }
 
-async function startContainer(ID) {
-  let data = null;
-
-  try{
-    data = await startContainerCreated(ID);
-  } catch (error) {
+async function startContainer(id) {
+  return startContainerCreated(id).catch((error) => {
     throw new CustomError(error.response.data, error.response.status);
-  }
-  return data;
+  });
 }

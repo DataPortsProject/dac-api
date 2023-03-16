@@ -2,8 +2,16 @@
 # -*- coding: utf-8 -*-
 
 #-- Environmental variables
-TIME_INTERVAL = 0
-TIME_UNIT = "null"
+RANDOM_ID = "E]L8P0ZBFE/1`PS08}@W#2G?E'{^OTB5[_4_:'@}ID1K1J)@8W*|%[72J^!C{]"
+PRIVATE_REPOSITORY = True
+URL_PUBLIC_REPOSITORY = ""
+PROJECT_NAME_PRIVATE_REPOSITORY = "datamodel"
+LINK_PRIVATE_REPOSITORY = "Posidonia/PosidoniaEvent/schema.json"
+CALLBACK_URL="https://putsreq.com/vKaAca4J7qOEZ0Pq4TcA"
+
+#-- for filter
+TIME_INTERVAL = 1
+TIME_UNIT = "MINUTES"
 
 class switch:
 

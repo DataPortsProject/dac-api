@@ -3,20 +3,16 @@ import { model, Schema } from 'mongoose';
 const mySchema = new Schema(
   {
     ID_Container: {
-      type: 'String'
+      type: 'String',
     },
-    Warnings: [ ],
+    Warnings: [],
     message: {
-      type: 'String'
+      type: 'String',
     },
   },
   {
-    _id: false
+    _id: false,
   }
-  /*,
-  {
-    timestamps: true
-  }*/
 );
 
 mySchema.index({ '$**': 'text' });

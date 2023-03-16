@@ -12,17 +12,7 @@ WORKDIR /agent
 ADD . /agent
 
 #next lines are for the different packages needed to run the scripts
-RUN pip install pyngsi
-
-RUN pip install deprecated
-
-RUN pip install python-dateutil>=2.8.0
-
-RUN pip install requests
-
-RUN pip install Flask==1.1.2
-
-RUN pip install jsonschema
+RUN pip install pyngsi  deprecated  python-dateutil>=2.8.0  requests  Flask==1.1.2  jsonschema
 
 EXPOSE 5000
 

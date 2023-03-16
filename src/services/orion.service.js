@@ -1,127 +1,116 @@
 ﻿import {
-	entitiesByType,
-	createEntities,
-	deleteEntities,
-	getSubscriptions,
-	checkDatasource,
-	getAgentsAsociated,
-	createSubscription,
-	deleteSubscriptions
+  entitiesByType,
+  createMetadataEntities,
+  deleteEntities,
+  getSubscriptions,
+  checkDatasource,
+  getAgentsAsociated,
+  createSubscription,
+  deleteSubscriptions,
 } from '../api/orion';
 import CustomError from '../utils/CustomError';
-
-const service = {};
-
-service.getEntitiesByType = getEntitiesByType;
-service.createEntity = createEntity;
-service.deleteEntity = deleteEntity;
-service.getORIONSubscription = getORIONSubscription;
-service.checkORIONDatasource = checkORIONDatasource;
-service.getORIONAgentsAsociated = getORIONAgentsAsociated;
-service.createSubscriptions = createSubscriptions;
-service.deleteSubscription = deleteSubscription;
-
-export default service;
+import logger from '../config/winston';
 
 // Implementation
-async function getEntitiesByType(type) {
-	let orionEntities = [];
-	try {
-		orionEntities = await entitiesByType(type);
-	} catch (error) {
-		// properties mapped to ORION errors
-		// throw new CustomError(error.response.data.description, error.response.status);
-		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
-	}
-	return orionEntities;
+export async function getEntitiesByType(type) {
+  try {
+    return await entitiesByType(type);
+  } catch (error) {
+    // properties mapped to ORION errors
+    // throw new CustomError(error.response.data.description, error.response.status);
+    throw new CustomError(
+      error.response.data.orionError.details,
+      error.response.data.orionError.code
+    );
+  }
 }
 
-async function createEntity(entity) {
-	let orionEntity = null;
-	try {
-		orionEntity = await createEntities(entity);
-	} catch (error) {
-		// properties mapped to ORION errors
-		// throw new CustomError(error.response.data.description, error.response.status);
-		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
-	}
-	return orionEntity;
+export async function createEntity(entity) {
+  try {
+    logger.debug(`Creating metadata for agent: ${JSON.stringify(entity)}`);
+    return await createMetadataEntities(entity);
+  } catch (error) {
+    if (error.isAxiosError) {
+      logger.error(JSON.stringify(error.response));
+    } else {
+      logger.error(error);
+    }
+    // properties mapped to ORION errors
+    // throw new CustomError(error.response.data.description, error.response.status);
+    throw new CustomError(
+      error.response.data.orionError.details,
+      error.response.data.orionError.code
+    );
+  }
 }
 
-async function createSubscriptions(entity) {
-	let orionEntity = null;
-
-	try {
-		// orionEntity = await createSubscription(entity);
-		// console.log(orionEntity);
-		await createSubscription(JSON.stringify(entity)).then(response => {
-			console.log(response);
-			orionEntity = response;
-		}) 
-	} catch (error) {
-		// properties mapped to ORION errors
-		// throw new CustomError(error.response.data.description, error.response.status);
-		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
-	}
-	return orionEntity;
+export async function createSubscriptions(entity) {
+  try {
+    return await createSubscription(JSON.stringify(entity));
+  } catch (error) {
+    // properties mapped to ORION errors
+    // throw new CustomError(error.response.data.description, error.response.status);
+    throw new CustomError(
+      error.response.data.orionError.details,
+      error.response.data.orionError.code
+    );
+  }
 }
 
-async function deleteEntity(ID) {
-	let orionEntity = null;
-	try {
-		orionEntity = await deleteEntities(ID);
-	} catch (error) {
-		// properties mapped to ORION errors
-		// throw new CustomError(error.response.data.description, error.response.status);
-		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
-	}
-	return orionEntity;
+export async function deleteEntity(id) {
+  try {
+    return await deleteEntities(id);
+  } catch (error) {
+    // properties mapped to ORION errors
+    throw new CustomError(
+      error.response.data.description,
+      error.response.status
+    );
+  }
 }
 
-async function deleteSubscription(ID) {
-	let subscriptionEntity = null;
-	try {
-		subscriptionEntity = await deleteSubscriptions(ID);
-	} catch (error) {
-		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
-	}
-	return subscriptionEntity;
+export async function deleteSubscription(id) {
+  try {
+    return await deleteSubscriptions(id);
+  } catch (error) {
+    throw new CustomError(
+      error.response.data.orionError.details,
+      error.response.data.orionError.code
+    );
+  }
 }
 
-async function getORIONSubscription() {
-	let orionSubscriptions = [];
-	try {
-		orionSubscriptions = await getSubscriptions();
-	} catch (error) {
-		// properties mapped to ORION errors
-		// throw new CustomError(error.response.data.description, error.response.status);
-		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
-	}
-	return orionSubscriptions;
+export async function getORIONSubscription() {
+  try {
+    return await getSubscriptions();
+  } catch (error) {
+    // properties mapped to ORION errors
+    logger.error(error.toString());
+    throw new CustomError(
+      error.response.data.orionError.details,
+      error.response.data.orionError.code
+    );
+  }
 }
 
-async function checkORIONDatasource(entityType, datasourceId) {
-	let data = null;
-	try {
-		await checkDatasource(entityType, datasourceId).then(response => {
-			data = response;
-		});
-	} catch (error) {
-		// throw new CustomError(error.response.data, error.response.status);
-		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
-	}
-	return data;
+export async function checkORIONDatasource(entityType, datasourceId) {
+  try {
+    return await checkDatasource(entityType, datasourceId);
+  } catch (error) {
+    throw new CustomError(
+      error.response.data.orionError.details,
+      error.response.data.orionError.code
+    );
+  }
 }
 
-async function getORIONAgentsAsociated(agentType, dataSourceId) {
-	let data = null;
-	try {
-		await getAgentsAsociated(agentType, dataSourceId).then(response => {
-			data = response;
-		});
-	} catch (error) {
-		// throw new CustomError(error.response.data, error.response.status);
-		throw new CustomError(error.response.data.orionError.details, error.response.data.orionError.code);
-	}
-	return data;
+export async function getORIONAgentsAsociated(agentType, dataSourceId) {
+  try {
+    return await getAgentsAsociated(agentType, dataSourceId);
+  } catch (error) {
+    throw new CustomError(
+      error.response.data.orionError.details,
+      error.response.data.orionError.code
+    );
+  }
 }

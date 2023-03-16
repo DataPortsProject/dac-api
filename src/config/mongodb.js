@@ -3,20 +3,22 @@ import config from './config';
 import logger from './winston';
 
 Mongoose.Promise = global.Promise;
+Mongoose.set('strictQuery', true);
 
-const connectToDb = async () => {
+// eslint-disable-next-line import/prefer-default-export
+export async function connectToDb() {
   try {
-    await Mongoose.connect(config.mongodb.URL, {
+    logger.info(`Connecting to ${config.mongodb.URL}`);
+    Mongoose.connect(config.mongodb.URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false
+      // these 2 properties were deprecated in earlier versions of mongoose
+      // useCreateIndex: true,
+      // useFindAndModify: false,
     });
 
     logger.info('Connected to MongoDB');
   } catch (err) {
     logger.error('Could not connect to MongoDB');
   }
-};
-
-export default connectToDb;
+}

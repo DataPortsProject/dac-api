@@ -1,0 +1,6 @@
+{
+  "id": "test_agent",
+  "message": "Error building entity for cygnus with line number 4697459 and data \"E2212                    YYYYYYYY                                 QV                     000000000000000000000000000000102647529400000000000000                           C                                                     00\n\"",
+  "register": "{\"error\": \"exception() missing 1 required positional argument: 'msg'\", \"stack\": \"Traceback (most recent call last):\\n  File \\\"/agent/script_AEAT.py\\\", line 717, in read_line\\n    customs_district = int(self[5:7])\\nValueError: invalid literal for int() with base 10: '  '\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \\\"/agent/script_AEAT.py\\\", line 476, in build_entity_cygnus\\n    aeat_properties: AEAT = AEAT.read_line(line)\\n  File \\\"/agent/script_AEAT.py\\\", line 889, in read_line\\n    logger.exception()\\nTypeError: exception() missing 1 required positional argument: 'msg'\\n\", \"data\": {\"number\": 4697459, \"line\": \"E2212                    YYYYYYYY                                 QV                     000000000000000000000000000000102647529400000000000000                           C                                                     00\\n\"}}",
+  "type": "ERROR"
+}

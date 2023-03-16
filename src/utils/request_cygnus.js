@@ -1,34 +1,40 @@
 import axios from 'axios';
 import variables from './variables';
 
+import logger from '../config/winston';
+
 // create an axios instance
 const service = axios.create({
-	baseURL: variables.baseURL_CYGNUS,
-	timeout: 15000 // request timeout
+  baseURL: variables.URL_CYGNUS,
+  timeout: 15000, // request timeout
 });
 
 // request interceptor
 service.interceptors.request.use(
-	config => {
-		// do something before request is sent
-		return config;
-	},
-	error => {
-		// do something with request error
-		return Promise.reject(error);
-	}
+  (config) => config,
+  (error) => {
+    // do something with request error
+    logger.error(error.toString());
+    if (error.isAxiosError) {
+      logger.debug(error.toJSON());
+    }
+    return Promise.reject(error);
+  }
 );
 
 // response interceptor
 service.interceptors.response.use(
-	response => {
-		// const res = JSON.stringify(response.data, null, 4)
-		const res = response.data;
-		return res;
-	},
-	error => {
-		return Promise.reject(error);
-	}
+  (response) => response.data,
+  (error) => {
+    // do something with request error
+    logger.error(error.toString());
+    if (error.isAxiosError) {
+      logger.debug(error.toJSON());
+    } else {
+      logger.debug(JSON.stringify(error));
+    }
+    return Promise.reject(error);
+  }
 );
 
 export default service;

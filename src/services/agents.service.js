@@ -1,130 +1,108 @@
 import CustomError from '../utils/CustomError';
-import { constructAgentsObj, constructInspectAgentObj, createTemplateObj } from '../utils/Mapping';
+import {
+  constructAgentsObj,
+  constructInspectAgentObj,
+  createTemplateObj,
+} from '../utils/Mapping';
+import logger from '../config/winston';
 
 /* eslint-disable */
 import {
-	getAgents,
-	createAgentDocker,
-	startContainerCreated,
-	stopContainerCreated,
-	getLogs,
-	inspectAgents,
-	deleteAgentByID,
-	inspectImageByID
+  getAgents,
+  createAgentDocker,
+  startContainerCreated,
+  stopContainerCreated,
+  getLogs,
+  inspectAgents,
+  deleteAgentById,
+  inspectImageById
 } from '../api/docker_API';
 
-const service = {};
-
-service.ngsiagent = ngsiagent;
-service.createAgent = createAgent;
-service.startAgent = startAgent;
-service.stopAgent = stopAgent;
-service.getLog = getLog;
-service.inspectAgent = inspectAgent;
-service.deleteAgent = deleteAgent;
-service.getTemplate = getTemplate;
-
-export default service;
-
 // Lista todos los agentes
-async function ngsiagent() {
-	let data = [];
-	try {
-		await getAgents().then(response => {
-			const agentsData = response;
-			data = constructAgentsObj(agentsData);
-		});
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+export async function getAllAgents() {
+  try {
+    return constructAgentsObj(await getAgents());
+  } catch (error) {
+    logger.error(`Failed retrieving agents:  ${error.toString()}`);
+    if (error.isAxiosError) {
+      if (error.response !== undefined) {
+        throw new CustomError(error.response.data, error.response.status);
+      } else {
+        throw new CustomError(
+          { message: { reason: error.code, context: error.message } },
+          500,
+          'Internal Server Error'
+        );
+      }
+    }
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
-
-async function getTemplate(containerName) {
-	let data = [];
-	try {
-		const imageInfo = await inspectImageByID(containerName);
-		data = createTemplateObj(imageInfo);
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+export async function getTemplate(containerName) {
+  try {
+    return createTemplateObj(await inspectImageById(containerName));
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
 // Crea un agente y lo arranca
-async function createAgent(model) {
-	let containerData = null;
-	let data = null;
-	try {
-		await createAgentDocker(model).then(response => {
-			containerData = response;
-			data = startAgent(containerData.Id);
-		});
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+export async function createAgent(model) {
+  try {
+    let containerInfo = await createAgentDocker(model);
+    // createAgent does not start the agent, we need to do it explicitelly
+    await startAgent(containerInfo.Id);
+    return containerInfo;
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
-async function startAgent(ID) {
-	let data = null;
-
-	try {
-		await startContainerCreated(ID).then(() => {
-			data = ID;
-		});
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+export async function startAgent(containerId) {
+  try {
+    return await startContainerCreated(containerId);
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
-async function stopAgent(ID) {
-	let data = null;
-
-	try {
-		await stopContainerCreated(ID).then(() => {
-			data = ID;
-		});
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+export async function stopAgent(id) {
+  try {
+    return await stopContainerCreated(id);
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
-async function deleteAgent(ID) {
-	let data = [];
-	try {
-		await deleteAgentByID(ID).then(() => {
-			data = ID;
-		});
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+/**
+ * Function that deletes an agent given its id
+ * @param {*} id
+ * @returns the agent id if the operation succeeds. If it fails, it throws a CustomError
+ */
+export async function deleteAgent(id) {
+  try {
+    return await deleteAgentById(id).then(() => id);
+  } catch (error) {
+    throw new CustomError(
+      error.response && error.response.data ? error.response.data.message : '',
+      error.response ? error.response.status : 0
+    );
+  }
 }
 
-async function getLog(ID, since) {
-	let data = null;
-	try {
-		await getLogs(ID, since).then(response => {
-			data = response;
-		});
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+export async function getLog(ID, since) {
+  try {
+    return await getLogs(ID, since);
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }
 
-async function inspectAgent(ID) {
-	let data = null;
-	try {
-		await inspectAgents(ID).then(response => {
-			data = constructInspectAgentObj(response);
-		});
-	} catch (error) {
-		throw new CustomError(error.response.data, error.response.status);
-	}
-	return data;
+export async function inspectAgent(id) {
+  try {
+    return constructInspectAgentObj(await inspectAgents(id));
+  } catch (error) {
+    throw new CustomError(error.response.data, error.response.status);
+  }
 }

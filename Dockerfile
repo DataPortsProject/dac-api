@@ -1,10 +1,11 @@
-FROM node:10.16.0-alpine
+FROM node:18.13.0-alpine as builder
 WORKDIR /api
 
+COPY package.json .
 
-ADD . /api
+RUN npm i --legacy-peer-deps
 
-RUN npm i
+COPY . .
 
 RUN npm run build
 
@@ -17,10 +18,21 @@ RUN npm run build
 #RUN npm run init
 
 #WORKDIR /api/dist
+
+FROM node:18.13.0-alpine
+
 EXPOSE 3000/tcp
 EXPOSE 3010/tcp
 ENV NODE_ENV production
 
-CMD ["npm", "run", "start"]
+WORKDIR /api
+
+COPY package*.json nodemon.json ./
+RUN npm i --omit=dev --force
+COPY --from=builder /api/dist ./src
+COPY ./ssl/cert.crt ./ssl/cert.key /etc/ssl/certs/
+
+# Make sure docker compose contains the "restart: always" property to automatically reboot the container on failure
+CMD ["npx", "nodemon", "--config", "nodemon.json", "--exitcrash", "./src/index.js"]
 
 LABEL MAINTAINER jclemente@prodevelop.es
